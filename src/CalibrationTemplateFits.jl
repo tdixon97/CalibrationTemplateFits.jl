@@ -1,5 +1,7 @@
 module CalibrationTemplateFits
 
-greet() = print("Hello World!")
+export GeneralisedHistogram
+export HistogramWithPars
+include("generalised_histogram.jl")
 
 end # module CalibrationTemplateFits

@@ -4,17 +4,27 @@ authors = ["Toby Dixon <toby.dixon.23@ucl.ac.uk>"]
 version = "0.1.0"
 
 [deps]
+Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 Aqua = "0.8.14"
+Distributions = "0.25.122"
+Documenter = "1.14.1"
+Interpolations = "0.16.2"
 JuliaFormatter = "2"
+Random = "1.11.0"
+StatsBase = "0.34.6"
 Test = "1"
 julia = "1.11"
 
 [extras]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 
 [targets]
-test = ["Aqua", "Test", "JuliaFormatter"]
+test = ["Aqua", "Test", "JuliaFormatter", "Random","Distributions"]
