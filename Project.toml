@@ -1,0 +1,4 @@
+name = "CalibrationTemplateFits"
+uuid = "421b3725-5a52-4150-a1b5-2789ece62381"
+authors = ["Toby Dixon <tdixon@berkeley.edu>"]
+version = "0.1.0"
