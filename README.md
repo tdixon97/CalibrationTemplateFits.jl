@@ -1,0 +1,8 @@
+# CalibrationTemplateFits.jl
+
+[![Build Status](https://github.com/tdixon97/CalibrationTemplateFits/workflows/CI/badge.svg)](https://github.com/tdixon97/CalibrationTemplateFits/actions/workflows/ci.yml)
+[![Codecov](https://codecov.io/gh/legend-exp/CalibrationTemplateFits/branch/main/graph/badge.svg)](https://codecov.io/gh/tdixon97/CalibrationTemplateFits)
+[![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
+
+
+Tools to fit calibration data to templates based on MC simulations, allowing also for sophisticated morphing of templates to include systematic uncertainties!

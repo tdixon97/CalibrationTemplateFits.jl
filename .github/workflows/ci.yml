@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # ----------------------------------------------------------------------
+  # 1️⃣  Pre-commit quality checks (formatting, YAML, etc.)
+  # ----------------------------------------------------------------------
+  precommit:
+    name: Run pre-commit checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.10'
+
+      - name: Install JuliaFormatter
+        run: julia --project=. -e 'using Pkg; Pkg.add("JuliaFormatter")'
+
+      - name: Run pre-commit checks
+        run: pre-commit run --all-files --show-diff-on-failure
+
+
+  # ----------------------------------------------------------------------
+  # 2️⃣  Julia package tests (unit tests)
+  # ----------------------------------------------------------------------
+  test:
+    name: Run Julia tests
+    runs-on: ubuntu-latest
+    needs: precommit   # only run tests if pre-commit passes
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.10'
+
+      - name: Cache Julia artifacts
+        uses: actions/cache@v4
+        with:
+          path: ~/.julia/artifacts
+          key: ${{ runner.os }}-julia-artifacts-${{ hashFiles('**/Project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-julia-artifacts-
+
+      - name: Instantiate project
+        run: julia --project=. -e 'using Pkg; Pkg.instantiate()'
+
+      - name: Run tests
+        run: julia --project=. -e 'using Pkg; Pkg.test()'
+
+      - name: Upload coverage report (optional)
+        if: success()
+        run: |
+          julia --project=. -e '
+            using Pkg;
+            Pkg.add("Coverage");
+            using Coverage;
+            Codecov.submit(Codecov.process_folder())
+          '
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

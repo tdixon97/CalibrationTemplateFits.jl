@@ -2,3 +2,9 @@ name = "CalibrationTemplateFits"
 uuid = "421b3725-5a52-4150-a1b5-2789ece62381"
 authors = ["Toby Dixon <tdixon@berkeley.edu>"]
 version = "0.1.0"
+
+[deps]
+JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
+
+[compat]
+JuliaFormatter = "2.1.6"
