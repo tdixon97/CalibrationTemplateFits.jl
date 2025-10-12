@@ -5,4 +5,4 @@
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
 
 
-Tools to fit calibration data to templates based on MC simulations, allowing also for sophisticated morphing of templates to include systematic uncertainties!
+Tools to model calibration data (with BAT.jl) to templates based on MC simulations, allowing also for morphing of templates with Interpolations.jl to include systematic uncertainties!

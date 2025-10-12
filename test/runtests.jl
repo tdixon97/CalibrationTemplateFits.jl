@@ -1,6 +1,4 @@
-using Test
+using Aqua
 using CalibrationTemplateFits
 
-@testset "CalibrationTemplateFits tests" begin
-    @test 1 + 1 == 2
-end
+Aqua.test_all(CalibrationTemplateFits)

@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: julia-format
         name: JuliaFormatter
-        entry: julia --project=. --color=yes -e 'using JuliaFormatter; format(".")'
+        entry: julia --color=yes -e 'using JuliaFormatter; format(".")'
         language: system
         files: '\.jl$'
         pass_filenames: false
