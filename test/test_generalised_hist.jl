@@ -27,6 +27,14 @@ end
     @test hists[1] isa HistogramWithPars
     @test ghist isa GeneralisedHistogram
 
+    # test it throws with different histos
+    hists_bad = HistogramWithPars[]
+    push!(hists_bad, HistogramWithPars(append!(Histogram(0:1.0:4000), [1, 2, 3]), reso = 1))
+    push!(hists_bad, HistogramWithPars(append!(Histogram(0:2.0:4000), [1, 2, 3]), reso = 2))
+
+
+    @test_throws ArgumentError GeneralisedHistogram(hists_bad, reso = 1:1:2)
+
     # if we try to construct with the wrong range we get an error
     @test_throws ArgumentError GeneralisedHistogram(hists, sigma = 0.1:0.15:2)
 
