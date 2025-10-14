@@ -3,37 +3,65 @@
 using Pkg
 Pkg.activate(".") # activate the environment
 Pkg.instantiate()
-
 using CalibrationTemplateFits
 using BAT
+using ArgParse
+using PropDicts
+using YAML
 
+function parse_commandline()
+    s = ArgParseSettings()
+    @add_arg_table! s begin
+        "--config", "-c"
+        help = "Path to YAML configuration file"
+        arg_type = String
+        required = true
+    end
+    return parse_args(s)
+end
 
 function main()
-
     @info "running using ", Base.Threads.nthreads(), " threads"
 
-    dets = get_detectors()
+    args = parse_commandline()
+    cfg = readprops(args["config"])
+    s = YAML.write(cfg)
 
-    mc = read_mc(input_mc)
+    @info "Using config ($cfg)\n$s"
 
-    # get the models
-    models = GeneralisedHistogram[]
+    # get the channel map
+    @info "... reading channel map"
+    chmap = readprobs(cfg.channel_map)
 
-    for det in dets
-        push!(models, get_model(mc, det; model_kwargs...))
-    end
+    # read data
+    @info "... read the data"
+    file_list = readprops(cfg.file_list)
+    data_table = io.read_data(cfg.data_path, file_list)
 
-    # get the data hist
-    data_table = read_data(input)
+    # cut some events
+    @info "... build data histograms"
+    data_sel = data[(.!data.coincident.puls) .& (.!data.trigger.is_forced)]
+    binning = io.parse_binning(cfg.binning)
+    data_hists = Dict(
+        det => io.get_data_histogram(det, data_sel, binning) for
+        det in keys(chmap) if chmap[det].system=="geds"
+    )
 
-    data_histograms = get_data_hist(data_table; model_kwargs...)
-    # build the likelihood
-    posterior = build_posterior(data, models; priors_kwargs...)
+    @info "... read mc"
+    models = io.read_models(cfg.mc_path, cfg.mc_label, binning)
+
+    @info "... make likelihood"
+    likelihood = likelihood.build_likelihood(data, models)
+
+    # this can be in config but its hard to keep type stability
+    prior = distprod(A = 0 .. 3000, z = -40 .. -80, phi = -6 .. 6)
 
     # sample
+    @info "... start sampling"
     samples =
         bat_sample(posterior, MCMCSampling(mcalg = MetropolisHastings(); fit_kwargs...)).result
 
     # save
-    save_result(samples, output)
+    @info "... now save samples"
+    bat_write(cfg.output, samples)
 end

@@ -1,0 +1,11 @@
+data_path: data_files/
+file_list: data_files.yaml
+channel_map: map.yaml
+mc_path: mc_files/
+mc_label: sis-1_slot-2
+binning: 2610:10:2620
+grid:
+  phi: -6:3:6
+  z: -80:10:40
+mcmc_kwargs:
+  n_chains: 10^6

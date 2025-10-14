@@ -3,6 +3,7 @@ using LegendHDF5IO
 using StatsBase
 using ProgressMeter
 using TypedTables
+using StatsBase
 
 """"
     read_data(path::String, files::Vector)
@@ -46,20 +47,44 @@ function get_data_histogram(det::Symbol, data::Table, range)
     return append!(Histogram(range), energy_sel)
 end
 
+"""Convert a set to a range"""
+function _set2range(set::Set)
+
+    vector = sort(collect(set))
+
+    range = vector[1]:diff(vector[1]):vector[end]
+
+    if collect(range)!=vector
+        error("vector is not evenly spaced, cannot convert to StepRangeLen")
+    end
+    range
+end
+
 """
-    read_mc(mc_path::String, label::String)
+    read_mc_models(mc_path::String, label::String,binning::Union{AbstractVector,AbstractRange})
+
+Read the MC files from `mc_path`,saving the results to the `GeneralisedHistogram`` models.
 """
-function read_mc(mc_path::String, label::String = "sis-1_source-2")
+function read_mc_models(
+    mc_path::String,
+    label::String,
+    binning::Union{AbstractVector,AbstractRange},
+)
     positions = glob("$(label)_$pos*", mc_path)
 
     n_prim = nothing
-    outputs = Dict{Symbol,Any}(ch => [] for ch in keys(chmap) if chmap[ch][:system]=="geds")
+    outputs = Dict()
 
     @showprogress for det in keys(chmap)
 
         if (chmap[det][:system]!="geds")
             continue
         end
+        histograms = HistogramWithPars[]
+
+        zs = Set([])
+        phis = Set([])
+
         for folder in positions
 
             files = glob("*", folder)
@@ -69,9 +94,16 @@ function read_mc(mc_path::String, label::String = "sis-1_source-2")
             z = parse(Float64, split(p_name, "_")[5])
             phi = parse(Float64, split(p_name, "_")[7])
 
-            push!(outputs[det], (data = table, phi = phi, z = z))
+            h = append!(Histogram(binning), data)
+            push!(histograms, HistogramWithPars(h, z = z, phi = phi))
+
+            #
+            push!(zs, z)
+            push!(phis, phi)
 
         end
+        outputs[det] =
+            GeneralisedHistogram(histograms, z = _set2range(zs), phi = _set2range(phis))
     end
     return outputs
 end
@@ -105,4 +137,27 @@ function create_generalised_hist(
     ghist = GeneralisedHistogram(hs, z = z_range, phi = phi_range)
     return ghist
 
+end
+
+"""
+    parse_binning(s::AbstractString) -> Edges
+
+Parses a string describing either a range (`"a:b:c"`) or a vector (`"[x₁, x₂, ...]"`)
+and wraps the result in a `Histograms.Edges` object.
+
+"""
+function parse_binning(s::AbstractString)
+    s = strip(s)
+    if startswith(s, "[") && endswith(s, "]")
+        nums = split(s[2:(end-1)], ',')
+        edges = parse.(Float64, strip.(nums))
+        return Edges(edges)
+    else
+        parts = split(s, ':')
+        if length(parts) != 3
+            error("Expected range of form a:b:c, got $s")
+        end
+        a, b, c = parse.(Float64, parts)
+        return Edges(a:b:c)
+    end
 end
