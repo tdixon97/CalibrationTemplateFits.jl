@@ -42,6 +42,7 @@ function main()
     @info "... build data histograms"
     data_sel = data[(.!data.coincident.puls) .& (.!data.trigger.is_forced)]
     binning = io.parse_binning(cfg.binning)
+
     data_hists = Dict(
         det => io.get_data_histogram(det, data_sel, binning) for
         det in keys(chmap) if chmap[det].system=="geds"
@@ -64,4 +65,10 @@ function main()
     # save
     @info "... now save samples"
     bat_write(cfg.output, samples)
+end
+
+
+# Run the main function if this file is executed directly
+if abspath(PROGRAM_FILE) == @__FILE__
+    main()
 end
