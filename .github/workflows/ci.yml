@@ -72,6 +72,9 @@ jobs:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
       - uses: julia-actions/cache@v2
+      - name: Add LegendJuliaRegistry
+        run: julia -e 'using Pkg; pkg"registry add General https://github.com/legend-exp/LegendJuliaRegistry.git"'
+
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
         with:
@@ -84,3 +87,14 @@ jobs:
           fail_ci_if_error: true
           files: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - uses: julia-actions/julia-processcoverage@v1
+        if: matrix.version == '1' && matrix.os == 'ubuntu-latest' && matrix.arch == 'x64'
+
+      # Upload to Codecov (optional)
+      - uses: codecov/codecov-action@v5
+        if: matrix.version == '1' && matrix.os == 'ubuntu-latest' && matrix.arch == 'x64'
+        with:
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: lcov.info

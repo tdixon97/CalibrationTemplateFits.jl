@@ -25,42 +25,44 @@ function main()
 
     args = parse_commandline()
     cfg = readprops(args["config"])
-    s = YAML.write(cfg)
+    s = YAML.write(Dict(cfg))
 
     @info "Using config ($cfg)\n$s"
 
     # get the channel map
     @info "... reading channel map"
-    chmap = readprobs(cfg.channel_map)
+    chmap = readprops(cfg.channel_map)
 
     # read data
     @info "... read the data"
     file_list = readprops(cfg.file_list)
-    data_table = io.read_data(cfg.data_path, file_list)
+    data = read_data(cfg.data_path, file_list[cfg.pos])
 
     # cut some events
     @info "... build data histograms"
     data_sel = data[(.!data.coincident.puls) .& (.!data.trigger.is_forced)]
-    binning = io.parse_binning(cfg.binning)
+    binning = parse_binning(cfg.binning)
 
+    @info "using binning $binning"
+    
     data_hists = Dict(
-        det => io.get_data_histogram(det, data_sel, binning) for
+        det => get_data_histogram(det, data_sel, binning) for
         det in keys(chmap) if chmap[det].system=="geds"
     )
 
     @info "... read mc"
-    models = io.read_models(cfg.mc_path, cfg.mc_label, binning)
+    models = read_models(cfg.mc_path, cfg.mc_label, binning)
 
     @info "... make likelihood"
-    likelihood = likelihood.build_likelihood(data, models)
+    likelihood = build_likelihood(data, models)
 
     # this can be in config but its hard to keep type stability
-    prior = distprod(A = 0 .. 3000, z = -40 .. -80, phi = -6 .. 6)
+    prior = distprod(A = 0 .. 3000, z = -40 .. -80, φ = -6 .. 6)
 
     # sample
     @info "... start sampling"
     samples =
-        bat_sample(posterior, MCMCSampling(mcalg = MetropolisHastings(); fit_kwargs...)).result
+        bat_sample(posterior, MCMCSampling(mcalg = MetropolisHastings()),nsteps = 10^6, nchains = 4).result
 
     # save
     @info "... now save samples"
