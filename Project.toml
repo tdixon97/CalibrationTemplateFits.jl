@@ -4,8 +4,12 @@ authors = ["Toby Dixon <toby.dixon.23@ucl.ac.uk>"]
 version = "0.1.0"
 
 [deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
+LegendHDF5IO = "c9265ca6-b027-5446-b1a4-febfa8dd10b0"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+TypedTables = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
 
 [compat]
 Aqua = "0.8.14"
@@ -13,18 +17,21 @@ Distributions = "0.25.122"
 Documenter = "1.14.1"
 Interpolations = "0.16.2"
 JuliaFormatter = "2"
+LegendHDF5IO = "0.1.17"
+ProgressMeter = "1.11.0"
 Random = "1.11.0"
 StatsBase = "0.34.6"
 Test = "1"
+TypedTables = "1.4.6"
 julia = "1.11"
 
 [extras]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 
 [targets]
-test = ["Aqua", "Test", "JuliaFormatter", "Random","Distributions"]
+test = ["Aqua", "Test", "JuliaFormatter", "Random", "Distributions"]
