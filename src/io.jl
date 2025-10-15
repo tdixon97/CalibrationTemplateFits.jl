@@ -66,6 +66,10 @@ Read the hit tier data from each file in `files` and the detector `det`.
 function read_mc_files(det::Union{Symbol,String}, files::Vector)
 
     outputs = nothing
+    if length(files)==0
+        throw(ArgumentError("No files"))
+    end
+
     for fi in files
         out_tmp = lh5open(fi, "r") do f
             f["hit/$det/energy"][:]
@@ -76,19 +80,43 @@ function read_mc_files(det::Union{Symbol,String}, files::Vector)
             outputs = out_tmp
         end
     end
-
     outputs
 end
+
+"""
+    extract_mc_coords(folder::String,pattern::String
+
+Extract the information from the mc file path
+"""
+function extract_mc_coords(folder::String, pattern::Regex)
+    m = match(pattern, folder)
+    if m !== nothing
+        x = parse(Float64, m.captures[1])
+        y = parse(Float64, m.captures[2])
+
+    else
+        throw(ArgumentError("No match found in $folder to $pattern"))
+    end
+    return x, y
+end
+
 """
     read_models(dets::AbstractVector, mc_path::String, label::String,binning::Union{AbstractVector,AbstractRange})
 
-Read the MC files from `mc_path`, saving the results to the `GeneralisedHistogram`` models.
+Read the MC files from `mc_path`, saving the results to the `GeneralisedHistogram`` models. We expect every
+MC file to be stored in a folder defining a 2D grid. The coordinates are extracted from the file name based on
+the supplied `pattern` regex.
 """
 function read_models(
     dets::AbstractVector,
     folders::AbstractVector{String},
     binning::Union{AbstractVector,AbstractRange},
+    pattern::Union{Regex,Nothing},
 )
+
+    if (pattern == nothing)
+        pattern = r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)"
+    end
 
     n_prim = nothing
     outputs = Dict()
@@ -103,15 +131,13 @@ function read_models(
 
             files = glob("*", folder)
             p_name = split(folder, "/")[end]
-            table = read_mc_files(det, files)
+            energies = read_mc_files(det, files)
 
-            z = parse(Float64, split(p_name, "_")[5])
-            φ = parse(Float64, split(p_name, "_")[7])
+            z, φ = extract_mc_coords(String(p_name), pattern)
 
-            h = append!(Histogram(binning), data)
+            h = append!(Histogram(binning), energies)
             push!(histograms, HistogramWithPars(h, z = z, φ = φ))
 
-            #
             push!(zs, z)
             push!(φs, φ)
 
