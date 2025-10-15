@@ -1,3 +1,6 @@
+using TypedTables
+using ArraysOfArrays
+
 """Convert a set to a range"""
 function _set2range(set::Set)
 
@@ -40,13 +43,13 @@ end
 
 Extract the histogram of the data.
 """
-function get_data_histogram(det::Symbol, data::Table, range)
-    r = chmap[det].daq.rawid
+function get_data_histogram(rawid::Int, data::Table, range)
 
     # flatten and get energy and rawid
-    rawid = flatview(data.geds.rawid)
+    r = flatview(data.geds.rawid)
     energy = flatview(data.geds.energy)
-    energy_sel = energy[rawid .== r]
+
+    energy_sel = energy[r .== rawid]
 
     return append!(Histogram(range), energy_sel)
 end

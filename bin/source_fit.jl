@@ -1,13 +1,12 @@
 
 
 using Pkg
-Pkg.activate(".") # activate the environment
-Pkg.instantiate()
 using CalibrationTemplateFits
 using BAT
 using ArgParse
 using PropDicts
 using YAML
+using Glob
 
 function parse_commandline()
     s = ArgParseSettings()
@@ -27,31 +26,29 @@ function main()
     cfg = readprops(args["config"])
     s = YAML.write(Dict(cfg))
 
-    @info "Using config ($cfg)\n$s"
+    @info "Using config \n$s"
 
     # get the channel map
     @info "... reading channel map"
     chmap = readprops(cfg.channel_map)
+    pos = cfg.pos
+    dets = [ch for ch in keys(chmap) if chmap[ch].system=="geds"]
 
     # read data
     @info "... read the data"
-    file_list = readprops(cfg.file_list)
-    data = read_data(cfg.data_path, file_list[cfg.pos])
-
-    # cut some events
-    @info "... build data histograms"
-    data_sel = data[(.!data.coincident.puls) .& (.!data.trigger.is_forced)]
     binning = parse_binning(cfg.binning)
+    rawid_map = Dict(det=>chmap[det].daq.rawid for det in dets)
 
-    @info "using binning $binning"
-    
-    data_hists = Dict(
-        det => get_data_histogram(det, data_sel, binning) for
-        det in keys(chmap) if chmap[det].system=="geds"
+    # and the histograms
+    data_hists = read_data_histograms(
+        cfg.data_path,
+        readprops(cfg.file_list)[pos],
+        rawid_map,
+        binning = binning,
     )
 
     @info "... read mc"
-    models = read_models(cfg.mc_path, cfg.mc_label, binning)
+    models = read_models(dets, glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path), binning)
 
     @info "... make likelihood"
     likelihood = build_likelihood(data, models)
@@ -61,8 +58,12 @@ function main()
 
     # sample
     @info "... start sampling"
-    samples =
-        bat_sample(posterior, MCMCSampling(mcalg = MetropolisHastings()),nsteps = 10^6, nchains = 4).result
+    samples = bat_sample(
+        posterior,
+        MCMCSampling(mcalg = MetropolisHastings()),
+        nsteps = 10^6,
+        nchains = 4,
+    ).result
 
     # save
     @info "... now save samples"
