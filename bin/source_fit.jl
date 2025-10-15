@@ -44,7 +44,7 @@ function main()
         cfg.data_path,
         readprops(cfg.file_list)[pos],
         rawid_map,
-        binning = binning,
+        binning,
     )
 
     @info "... read mc"

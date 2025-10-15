@@ -10,18 +10,17 @@ using Glob
     function read_data_histograms(
         data_path::String,
         file_list::AbstractVector{String},
-        det_map::Dict;
+        det_map::Dict,
         binning::Union{AbstractRange,AbstractVector},
     )
 
 Read the data from `data_path` and the files in `file_list` and make histograms with the `binning` for each detector in the keys of `dets` (with the values
 being the "rawids").
 """
-
 function read_data_histograms(
     data_path::String,
     file_list::AbstractVector{String},
-    det_map::Dict;
+    det_map::Dict,
     binning::Union{AbstractRange,AbstractVector},
 )
 
