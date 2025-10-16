@@ -28,9 +28,9 @@ using StatsBase
     model = GeneralisedHistogram(hists, par = 0:1:1)
 
     # likelihood should be just - model prediction
-    @test isapprox(spectrum_likelihood(data, model, (par = 0.0,)), -1.0, atol = 1e-5)
-    @test isapprox(spectrum_likelihood(data, model, (par = 1.0,)), -2.0, atol = 1e-5)
-    @test isapprox(spectrum_likelihood(data, model, (par = 0.5,)), -1.5, atol = 1e-5)
+    @test isapprox(spectrum_likelihood(data, model, (par = 0.0, A = 1)), -1.0, atol = 1e-5)
+    @test isapprox(spectrum_likelihood(data, model, (par = 1.0, A = 1)), -2.0, atol = 1e-5)
+    @test isapprox(spectrum_likelihood(data, model, (par = 0.5, A = 1)), -1.5, atol = 1e-5)
 
 
 
