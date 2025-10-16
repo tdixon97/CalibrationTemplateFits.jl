@@ -63,7 +63,7 @@ end
 
 Read the hit tier data from each file in `files` and the detector `det`.
 """
-function read_mc_files(det::Union{Symbol,String}, files::Vector)
+function read_mc_files(det::Union{Symbol,String}, files::Vector; field::String = "energy")
 
     outputs = nothing
     if length(files)==0
@@ -72,7 +72,7 @@ function read_mc_files(det::Union{Symbol,String}, files::Vector)
 
     for fi in files
         out_tmp = lh5open(fi, "r") do f
-            f["hit/$det/energy"][:]
+            f["hit/$det/$field"][:]
         end
         if (outputs!=nothing)
             outputs = vcat(outputs, out_tmp)
@@ -111,7 +111,7 @@ function read_models(
     dets::AbstractVector,
     folders::AbstractVector{String},
     binning::Union{AbstractVector,AbstractRange},
-    pattern::Union{Regex,Nothing},
+    pattern::Union{Regex,Nothing};
 )
 
     if (pattern == nothing)
@@ -131,7 +131,8 @@ function read_models(
 
             files = glob("*", folder)
             p_name = split(folder, "/")[end]
-            energies = read_mc_files(det, files)
+
+            energies = read_mc_files(det, files, field = "energy")
 
             z, φ = extract_mc_coords(String(p_name), pattern)
 

@@ -15,6 +15,14 @@ function parse_commandline()
         help = "Path to YAML configuration file"
         arg_type = String
         required = true
+
+        "--vary-fccd", "-f"
+        help = "Vary the FCCD"
+        action = :store_true
+
+        "--vary-dlf", "-t"
+        help = "Vary the DLF parameter"
+        action = :store_true
     end
     return parse_args(s)
 end
@@ -25,6 +33,10 @@ function main()
     args = parse_commandline()
     cfg = readprops(args["config"])
     s = YAML.write(Dict(cfg))
+
+    if (args["vary_fccd"]|args["vary_dlf"])
+        throw(NotImplementedError("vary fccd or dlf is not implemented"))
+    end
 
     @info "Using config \n$s"
 
