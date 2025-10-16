@@ -29,14 +29,11 @@ function make_summary_plots(path::String, samples::DensitySamplesVector)
             samples, par,
             mean = false, std = false, globalmode = false, marginalmode = true, alpha=0.7,
                                 colors = color_scheme,
-            nbins = 200, title = "Marginalized Distribution for z offset", size=(800,500)
+            nbins = 200, title = "Marginalized Distribution for $par", size=(800,500)
         )
 
         savefig(p, "temp.pdf")
-        append_pdf(path,
-                    "temp.pdf",
-                    cleanup = true,
-                )
+        append_pdf(path, "temp.pdf", cleanup = true)
     end
 end
 end
