@@ -7,6 +7,7 @@ export read_data_histograms
 export parse_binning
 export read_models
 export build_likelihood
+export spectrum_likelihood
 
 include("generalised_histogram.jl")
 include("functions.jl")

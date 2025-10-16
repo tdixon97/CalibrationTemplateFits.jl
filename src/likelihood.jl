@@ -28,7 +28,9 @@ function spectrum_likelihood(
     params::NamedTuple,
 )
     # get model predictions
-    mu = forward_model(model, params)
+    mu = get_weights(model; params...)
+
+    # compute likelihood
     _poisson_likelihood(data.weights, mu)
 
 end
