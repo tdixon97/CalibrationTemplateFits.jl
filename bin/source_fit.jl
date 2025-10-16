@@ -72,16 +72,19 @@ function main()
     likelihood = build_likelihood(data_hists, models)
 
     # this can be in config but its hard to keep type stability
-    prior = distprod(A = 0. .. 3000., z = -80. .. -40., φ = -6. .. 6.)
+    prior = distprod(A = 0.0 .. 3000.0, z = -80.0 .. -40.0, φ = -6.0 .. 6.0)
 
     posterior = PosteriorMeasure(likelihood, prior)
-    
+
     # sample
     @info "... start sampling"
-    samples =  bat_sample(posterior, TransformedMCMC(proposal = RandomWalk(), nsteps = 10^5, nchains = 4)).result
+    samples = bat_sample(
+        posterior,
+        TransformedMCMC(proposal = RandomWalk(), nsteps = 10^5, nchains = 4),
+    ).result
 
-    #@info "... make some summary plots"
-    #make_summary_plots(samples)
+    @info "... make some summary plots"
+    make_summary_plots(cfg.plot_path, samples)
 
     # save
     @info "... now save samples"
