@@ -7,6 +7,7 @@ using ArgParse
 using PropDicts
 using YAML
 using Glob
+using IntervalSets
 
 function parse_commandline()
     s = ArgParseSettings()
@@ -71,16 +72,13 @@ function main()
     likelihood = build_likelihood(data_hists, models)
 
     # this can be in config but its hard to keep type stability
-    prior = distprod(A = 0 .. 3000, z = -40.0 .. -80.0, φ = -6.0 .. 6.0)
+    prior = distprod(A = 0. .. 3000., z = -80. .. -40., φ = -6. .. 6.)
 
+    posterior = PosteriorMeasure(likelihood, prior)
+    
     # sample
     @info "... start sampling"
-    samples = bat_sample(
-        posterior,
-        MCMCSampling(mcalg = MetropolisHastings()),
-        nsteps = 10^6,
-        nchains = 4,
-    ).result
+    samples =  bat_sample(posterior, TransformedMCMC(proposal = RandomWalk(), nsteps = 10^5, nchains = 4)).result
 
     #@info "... make some summary plots"
     #make_summary_plots(samples)

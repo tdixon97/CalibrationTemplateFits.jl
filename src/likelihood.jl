@@ -29,8 +29,6 @@ function spectrum_likelihood(
 )
     # get model predictions
     mu = get_weights(model; params...)
-
-    # compute likelihood
     _poisson_likelihood(data.weights, mu)
 
 end
