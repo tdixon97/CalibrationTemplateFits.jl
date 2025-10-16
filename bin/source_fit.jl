@@ -69,10 +69,9 @@ function main()
     )
 
     @info "... make likelihood"
-    
-    likelihood = build_likelihood(data_hists, models, 
-                        n_sim = cfg.n_sim, 
-                        livetime = cfg.livetime)
+
+    likelihood =
+        build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
     # this can be in config but its hard to keep type stability
     prior = distprod(A = 0.0 .. 3000.0, z = -80.0 .. -40.0, φ = -6.0 .. 6.0)
@@ -86,7 +85,7 @@ function main()
         TransformedMCMC(proposal = RandomWalk(), nsteps = 10^6, nchains = 4),
     ).result
     @info samples
-    
+
     @info "... make some summary plots"
     make_summary_plots(cfg.plot_path, samples)
 
