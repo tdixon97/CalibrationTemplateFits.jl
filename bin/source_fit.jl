@@ -83,8 +83,8 @@ function main()
         TransformedMCMC(proposal = RandomWalk(), nsteps = 10^5, nchains = 4),
     ).result
 
-    #@info "... make some summary plots"
-    #make_summary_plots(samples)
+    @info "... make some summary plots"
+    make_summary_plots(cfg.plot_path, samples)
 
     # save
     @info "... now save samples"
