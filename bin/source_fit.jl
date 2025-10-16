@@ -72,11 +72,7 @@ function main()
     likelihood = build_likelihood(data_hists, models)
 
     # this can be in config but its hard to keep type stability
-<<<<<<< HEAD
-    prior = distprod(A = 0 .. 3000, z = -40.0 .. -80.0, φ = -6.0 .. 6.0)
-=======
     prior = distprod(A = 0. .. 3000., z = -80. .. -40., φ = -6. .. 6.)
->>>>>>> 5e4d073 (some fixes)
 
     posterior = PosteriorMeasure(likelihood, prior)
     
