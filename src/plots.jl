@@ -2,16 +2,6 @@ using BAT
 using Plots
 using PDFmerger: append_pdf!
 
-Plots.default(
-    framestyle = :box,
-    background_color = :white,
-    titlefontsize = 10,
-    guidefontsize = 10,
-    tickfontsize = 10,
-    legendfontsize = 8,
-)
-
-color_schemes = [:red4, :red, :salmon]
 
 """
     function make_summary_plots(path::String, samples::DensitySamplesVector)
@@ -20,8 +10,18 @@ Produce some summary plots of the fit results.
 """
 function make_summary_plots(path::String, samples::DensitySampleVector)
 
-    color_scheme = [:red4, :red, :salmon]
-
+    
+    Plots.default(
+        framestyle = :box,
+        background_color = :white,
+        titlefontsize = 10,
+        guidefontsize = 10,
+        tickfontsize = 10,
+        legendfontsize = 8,
+    )
+    
+    color_schemes = [:red4, :red, :salmon]
+    
     for par in [:z, :A, :φ]
         p = plot(
             samples,

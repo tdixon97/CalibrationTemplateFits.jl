@@ -1,5 +1,3 @@
-
-
 using Pkg
 using CalibrationTemplateFits
 using BAT
@@ -16,7 +14,23 @@ function parse_commandline()
         help = "Path to YAML configuration file"
         arg_type = String
         required = true
-
+        
+        "--output", "-o"
+        help = "Path to output folder"
+        arg_type = String
+        required = true
+        
+        "--pos", "-p"
+        help = "Position to use"
+        arg_type = Int
+        required = true
+        
+        "--binning", "-b"
+        help = "Binning to use, either range or list"
+        arg_type = String
+        required = false
+        default = "2605:20:2625"
+        
         "--vary-fccd", "-f"
         help = "Vary the FCCD"
         action = :store_true
@@ -34,31 +48,34 @@ function main()
     args = parse_commandline()
     cfg = readprops(args["config"])
     s = YAML.write(Dict(cfg))
+    @info "Using config \n$s"
 
     if (args["vary-fccd"]|args["vary-dlf"])
         throw(NotImplementedError("vary fccd or dlf is not implemented"))
     end
 
-    @info "Using config \n$s"
 
     # get the channel map
     @info "... reading channel map"
     chmap = readprops(cfg.channel_map)
-    pos = cfg.pos
+    pos = args["pos"]
+    
     dets = [ch for ch in keys(chmap) if chmap[ch].system=="geds"]
-
+    
     # read data
     @info "... read the data"
-    binning = parse_binning(cfg.binning)
+    binning = parse_binning(args["binning"])
     rawid_map = Dict(det=>chmap[det].daq.rawid for det in dets)
 
+    list = readprops(cfg.file_list)
     # and the histograms
     data_hists = read_data_histograms(
         cfg.data_path,
-        readprops(cfg.file_list)[pos],
+        list[pos],
         rawid_map,
         binning,
     )
+
 
     @info "... read mc"
     models = read_models(
@@ -69,7 +86,6 @@ function main()
     )
 
     @info "... make likelihood"
-
     likelihood =
         build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
@@ -84,14 +100,15 @@ function main()
         posterior,
         TransformedMCMC(proposal = RandomWalk(), nsteps = 10^6, nchains = 4),
     ).result
-    @info samples
 
     @info "... make some summary plots"
-    make_summary_plots(cfg.plot_path, samples)
+    dir = args["output"]
+    isdir(dir) || mkdir(dir)
+    make_summary_plots(dir*"/plots.pdf", samples)
 
     # save
     @info "... now save samples"
-    bat_write(cfg.output, samples)
+    bat_write(dir*"/samples.h5", samples)
 
 end
 
