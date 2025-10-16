@@ -1,6 +1,8 @@
 
 using StatsBase
 using Distributions
+using BAT
+using DensityInterface
 
 """
     poisson_likelihood(obs_weight::Vector, pred_weight::Vector)

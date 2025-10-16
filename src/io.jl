@@ -111,7 +111,7 @@ function read_models(
     dets::AbstractVector,
     folders::AbstractVector{String},
     binning::Union{AbstractVector,AbstractRange},
-    pattern::Union{Regex,Nothing};
+    pattern::Union{Regex,Nothing} = nothing;
 )
 
     if (pattern == nothing)

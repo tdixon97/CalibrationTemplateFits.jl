@@ -34,7 +34,7 @@ function main()
     cfg = readprops(args["config"])
     s = YAML.write(Dict(cfg))
 
-    if (args["vary_fccd"]|args["vary_dlf"])
+    if (args["vary-fccd"]|args["vary-dlf"])
         throw(NotImplementedError("vary fccd or dlf is not implemented"))
     end
 
@@ -60,13 +60,13 @@ function main()
     )
 
     @info "... read mc"
-    models = read_models(dets, glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path), binning)
+    models = read_models(dets, glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path), binning,r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)")
 
     @info "... make likelihood"
-    likelihood = build_likelihood(data, models)
+    likelihood = build_likelihood(data_hists, models)
 
     # this can be in config but its hard to keep type stability
-    prior = distprod(A = 0 .. 3000, z = -40 .. -80, φ = -6 .. 6)
+    prior = distprod(A = 0 .. 3000, z = -40. .. -80., φ = -6. .. 6.)
 
     # sample
     @info "... start sampling"
@@ -77,9 +77,13 @@ function main()
         nchains = 4,
     ).result
 
+    #@info "... make some summary plots"
+    #make_summary_plots(samples)
+    
     # save
     @info "... now save samples"
     bat_write(cfg.output, samples)
+    
 end
 
 
