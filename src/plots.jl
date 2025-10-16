@@ -13,7 +13,7 @@ default(
 
 tol_colors = ColorSchemes.tol_muted
 color_schemes = [:red4, :red, :salmon]
-    
+
 """
     function make_summary_plots(path::String, samples::DensitySamplesVector)
 
@@ -31,7 +31,7 @@ function make_summary_plots(path::String, samples::DensitySamplesVector)
                                 colors = color_scheme,
             nbins = 200, title = "Marginalized Distribution for z offset", size=(800,500)
         )
-    
+
         savefig(p, "temp.pdf")
         append_pdf(path,
                     "temp.pdf",
