@@ -25,10 +25,11 @@ in this case a `GeneralisedHistogram`.
 function spectrum_likelihood(
     data::Histogram,
     model::GeneralisedHistogram,
-    params::NamedTuple,
+    params::NamedTuple;
+    norm::Real = 1
 )
     # get model predictions
-    mu = get_weights(model; params...)
+    mu = get_weights(model; params...)*params.A*norm
     _poisson_likelihood(data.weights, mu)
 
 end
@@ -40,7 +41,7 @@ Build the likelihood summing over all the spectra in the
 `data_hists` and models defined by `models`. In each case
 a Poisson likelihood is employed.
 """
-function build_likelihood(data_hists::Dict, models::Dict)
+function build_likelihood(data_hists::Dict, models::Dict; livetime::Real = 1, n_sim::Real = 1)
 
     logfuncdensity(
         function (params::NamedTuple)
@@ -49,7 +50,7 @@ function build_likelihood(data_hists::Dict, models::Dict)
 
             # loop over spectra
             for ch in keys(data_hists)
-                ll_value += spectrum_likelihood(data_hists[ch], models[ch], params)
+                ll_value += spectrum_likelihood(data_hists[ch], models[ch], params, norm = livetime/n_sim)
             end
 
             return ll_value
