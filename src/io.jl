@@ -127,11 +127,15 @@ function read_models(
         zs = Set([])
         φs = Set([])
 
+        if (length(folders)==0)
+            throw(ValueError("no folders found in the input path - check this!"))
+        end
+        
         for folder in folders
 
             files = glob("*", folder)
             p_name = split(folder, "/")[end]
-
+            
             energies = read_mc_files(det, files, field = "energy")
 
             z, φ = extract_mc_coords(String(p_name), pattern)
