@@ -3,6 +3,7 @@ using StatsBase
 using Distributions
 using BAT
 using DensityInterface
+using IntervalSets
 
 """
     poisson_likelihood(obs_weight::Vector, pred_weight::Vector)
@@ -66,4 +67,18 @@ function build_likelihood(
             return ll_value
         end,
     )
+end
+
+function build_prior(dets::AbstractVector;vary_fccd::Bool = false)
+
+    dist = if !vary_fccd
+        distprod(A = 0.0 .. 3000.0, z = -20.0 .. 20.0, φ = -6.0 .. 6.0)
+    else
+        dists = Dict(:A=>0.0 .. 3000, :z=>-80 .. -40.,:φ => -6.0 .. 6.0)
+        for det in dets
+            dists[Symbol("fccd_$det")] = 0 .. 2
+        end
+        distprod(;dists...)
+    end
+    dist
 end

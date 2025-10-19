@@ -35,9 +35,6 @@ function parse_commandline()
         help = "Vary the FCCD"
         action = :store_true
 
-        "--vary-dlf", "-t"
-        help = "Vary the DLF parameter"
-        action = :store_true
     end
     return parse_args(s)
 end
@@ -50,14 +47,12 @@ function main()
     s = YAML.write(Dict(cfg))
     @info "Using config \n$s"
 
-    if (args["vary-fccd"]|args["vary-dlf"])
-        throw(NotImplementedError("vary fccd or dlf is not implemented"))
-    end
 
 
     # get the channel map
     @info "... reading channel map"
     chmap = readprops(cfg.channel_map)
+
     pos = args["pos"]
     
     dets = [ch for ch in keys(chmap) if chmap[ch].system=="geds"]
@@ -67,31 +62,35 @@ function main()
     binning = parse_binning(args["binning"])
     rawid_map = Dict(det=>chmap[det].daq.rawid for det in dets)
 
-    list = readprops(cfg.file_list)
+    list = haskey(cfg, "file-list") ? cfg["file-list"] : basename.(glob("*.lh5", cfg.data_path))
+    
+    @info "... read mc"
+    models = read_models_evt(
+        dets,
+        glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
+        binning,
+        rawid_map,
+        r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
+        #vary_fccd = args["vary-fccd"]
+    )
+    
     # and the histograms
     data_hists = read_data_histograms(
         cfg.data_path,
-        list[pos],
+        list,
         rawid_map,
         binning,
     )
 
-
-    @info "... read mc"
-    models = read_models(
-        dets,
-        glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
-        binning,
-        r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
-    )
-
+    
+    
     @info "... make likelihood"
     likelihood =
         build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
     # this can be in config but its hard to keep type stability
-    prior = distprod(A = 0.0 .. 3000.0, z = -80.0 .. -40.0, φ = -6.0 .. 6.0)
-
+    prior = build_prior(dets,vary_fccd = args["vary-fccd"])
+    
     posterior = PosteriorMeasure(likelihood, prior)
 
     # sample
@@ -104,7 +103,7 @@ function main()
     @info "... make some summary plots"
     dir = args["output"]
     isdir(dir) || mkdir(dir)
-    make_summary_plots(dir*"/plots.pdf", samples)
+    make_summary_plots(dir*"/plots.pdf", samples, dets,args["vary-fccd"])
 
     # save
     @info "... now save samples"
