@@ -48,8 +48,9 @@ function get_data_histogram(rawid::Int, data::Table, range)
     # flatten and get energy and rawid
     r = flatview(data.geds.rawid)
     energy = flatview(data.geds.energy)
+    is_good = flatview(data.geds.quality.is_good_channel)
 
-    energy_sel = energy[r .== rawid]
+    energy_sel = energy[(r .== rawid) .& is_good]
 
     return append!(Histogram(range), energy_sel)
 end
