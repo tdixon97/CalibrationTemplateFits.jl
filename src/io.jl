@@ -7,8 +7,38 @@ using CalibrationTemplateFits
 using Glob
 using Base.Threads
 using LegendHDF5IO
+
+
 """
     function read_data_histograms(
+        file::String,
+        group::String,
+        dets::AbstractVector,
+        binning::Union{AbstractRange,AbstractVector},
+    )
+
+Read the data from `file` which contains histograms for each channel (under `group`)
+and rebin to the `binning` for each detector in `dets`.
+"""
+function read_data_histograms(
+    file::String,
+    group::String,
+    dets::AbstractVector,
+    binning::Union{AbstractRange,AbstractVector},
+)
+
+    h = rebin_integer(read_hist(group, file), binning)
+
+    data_hists =
+        Dict(det => rebin_integer(read_hist("$group/$det", file), binning) for det in dets)
+    return data_hists
+
+end
+
+
+
+"""
+    function make_data_histograms(
         data_path::String,
         file_list::AbstractVector{String},
         det_map::Dict,
@@ -18,7 +48,7 @@ using LegendHDF5IO
 Read the data from `data_path` and the files in `file_list` and make histograms with the `binning` for each detector in the keys of `dets` (with the values
 being the "rawids").
 """
-function read_data_histograms(
+function make_data_histograms(
     data_path::String,
     file_list::AbstractVector{String},
     det_map::Dict,
@@ -35,6 +65,8 @@ function read_data_histograms(
     return data_hists
 
 end
+
+
 """"
     read_data(path::String, files::Vector)
 
@@ -59,6 +91,7 @@ function read_data(path::String, files::Vector)
     end
     return data
 end
+
 """
     read_mc_files(det::Union{Symbol,String}, files::Vector)
 

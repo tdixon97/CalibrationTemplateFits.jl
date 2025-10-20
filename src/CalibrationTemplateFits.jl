@@ -4,6 +4,8 @@ export GeneralisedHistogram
 export HistogramWithPars
 export piecewise_linear_activeness
 export read_data_histograms
+export make_data_histograms
+
 export parse_binning
 export read_models
 export read_models_evt

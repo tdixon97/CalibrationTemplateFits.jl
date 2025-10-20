@@ -9,7 +9,7 @@ using StatsBase
 
     @test CalibrationTemplateFits.read_data(path, ["evt_data.lh5"]) isa Table
 
-    hists = read_data_histograms(
+    hists = make_data_histograms(
         path,
         ["evt_data.lh5"],
         Dict(:det1=>1, :det2=>2, :det3=>3),
@@ -19,12 +19,22 @@ using StatsBase
     @test Set(keys(hists)) == Set([:det1, :det2, :det3])
 
     # should also work with vector
-    hists = read_data_histograms(
+    hists = make_data_histograms(
         path,
         ["evt_data.lh5"],
         Dict(:det1=>1, :det2=>2, :det3=>3),
         [2500, 2600, 2620, 2700],
     )
+    @test all(x isa Histogram for x in values(hists))
+    @test Set(keys(hists)) == Set([:det1, :det2, :det3])
+
+end
+
+@testset "test_read_data_hist" begin
+
+    path = joinpath(@__DIR__, "test_files")
+
+    hists = read_data_histograms(path*"pdf_data.lh5", [:det1, :det2, :det3], 0:10:4000)
     @test all(x isa Histogram for x in values(hists))
     @test Set(keys(hists)) == Set([:det1, :det2, :det3])
 
