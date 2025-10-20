@@ -26,9 +26,6 @@ function read_data_histograms(
     dets::AbstractVector,
     binning::Union{AbstractRange,AbstractVector},
 )
-
-    h = rebin_integer(read_hist(group, file), binning)
-
     data_hists =
         Dict(det => rebin_integer(read_hist("$group/$det", file), binning) for det in dets)
     return data_hists

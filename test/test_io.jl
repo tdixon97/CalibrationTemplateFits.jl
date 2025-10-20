@@ -34,7 +34,8 @@ end
 
     path = joinpath(@__DIR__, "test_files")
 
-    hists = read_data_histograms(path*"pdf_data.lh5", [:det1, :det2, :det3], 0:10:4000)
+    hists =
+        read_data_histograms(path*"/pdf_data.lh5", "hit", [:det1, :det2, :det3], 0:10:4000)
     @test all(x isa Histogram for x in values(hists))
     @test Set(keys(hists)) == Set([:det1, :det2, :det3])
 
