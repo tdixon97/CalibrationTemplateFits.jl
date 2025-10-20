@@ -6,7 +6,7 @@ using StatsBase
 using CalibrationTemplateFits
 using Glob
 using Base.Threads
-
+using LegendHDF5IO
 """
     function read_data_histograms(
         data_path::String,
@@ -246,6 +246,87 @@ function read_models_evt(
     outputs = Dict()
     for det in dets
         # build per-detector histogram
+        outputs[det] = GeneralisedHistogram(
+            det_histograms[det];
+            z = _set2range(det_zs[det]),
+            φ = _set2range(det_φs[det]),
+        )
+    end
+
+    outputs
+end
+
+"""
+     read_hist(group::String,file::String)
+"""
+function read_hist(group::String, file::String)
+
+    binning = lh5open("$file", "r") do f
+        f["$group/binning/axis_0"]
+    end
+    weights = lh5open("$file", "r") do f
+        f["$group/weights"][:]
+    end
+    h = LegendHDF5IO._nt_to_histogram((
+        binning = [binning],
+        weights = weights,
+        isdensity = false,
+    ))
+
+    return h
+
+end
+
+"""
+    read_models_hist(
+        dets::AbstractVector,
+        files::AbstractVector{String},
+        binning::Union{AbstractVector,AbstractRange},
+        pattern::Union{Regex,Nothing} = nothing,
+        group::String
+    )
+
+Read precomputed histograms from `files` and rebin them to the desired `binning``.
+"""
+function read_models_hist(
+    dets::AbstractVector,
+    files::AbstractVector{String},
+    binning::Union{AbstractVector,AbstractRange},
+    pattern::Union{Regex,Nothing} = nothing,
+    group::String = "hist",
+)
+
+    if pattern === nothing
+        pattern = r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)"
+    end
+
+    n_dets = length(dets)
+    det_histograms = Dict(det => HistogramWithPars[] for det in dets)
+    det_zs = Dict(det => Set{Float64}() for det in dets)
+    det_φs = Dict(det => Set{Float64}() for det in dets)
+
+    isempty(files) && throw(ArgumentError("no files found in the input path - check this!"))
+
+    for file in files
+
+        # list histogram files (one per detector, typically)
+
+        p_name = split(split(file, "/")[end], ".")[1]
+        z, φ = extract_mc_coords(String(p_name), pattern)
+
+        for det in dets
+
+            h = read_hist("$group/$det", file)
+            h = CalibrationTemplateFits.rebin_integer(h, binning)
+            push!(det_histograms[det], HistogramWithPars(h, z = z, φ = φ))
+
+            push!(det_zs[det], z)
+            push!(det_φs[det], φ)
+        end
+    end
+
+    outputs = Dict()
+    for det in dets
         outputs[det] = GeneralisedHistogram(
             det_histograms[det];
             z = _set2range(det_zs[det]),

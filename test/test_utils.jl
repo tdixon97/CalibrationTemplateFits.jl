@@ -40,7 +40,6 @@ end
     @testset "Basic rebinning" begin
         new_edges = 0:2:10
         h2 = CalibrationTemplateFits.rebin_integer(h, new_edges)
-
         @test h2.edges[1] == collect(new_edges)
         @test sum(h2.weights) ≈ sum(h.weights)
         @test length(h2.weights) == length(new_edges) - 1
@@ -61,7 +60,7 @@ end
 
     # 4. One-bin edge case
     @testset "One-bin edge case" begin
-        h2 = CalibrationTemplateFits.rebin_integer(h, [0, 10])
+        h2 = CalibrationTemplateFits.rebin_integer(h, 0:10:10)
         @test sum(h2.weights) ≈ sum(h.weights)
         @test length(h2.weights) == 1
     end

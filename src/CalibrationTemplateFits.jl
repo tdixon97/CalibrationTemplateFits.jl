@@ -7,6 +7,8 @@ export read_data_histograms
 export parse_binning
 export read_models
 export read_models_evt
+export read_models_hist
+
 export build_likelihood
 export spectrum_likelihood
 export make_summary_plots

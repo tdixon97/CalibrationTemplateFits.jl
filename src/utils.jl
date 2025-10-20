@@ -83,9 +83,9 @@ function rebin_integer(h::Histogram, new_edges)
     # Create a new histogram and fill it
     rebinned = fit(Histogram, Float64[], new_edges)
     for (count, (lo, hi)) in zip(h.weights, zip(old_edges[1:(end-1)], old_edges[2:end]))
-        mid = (lo + hi) / 2
+        mid = (lo+hi)/2
         bin_index = searchsortedlast(new_edges, mid)
-        if bin_index < length(new_edges)
+        if (bin_index < length(new_edges)) & (bin_index > 0)
             rebinned.weights[bin_index] += count
         end
     end

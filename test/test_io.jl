@@ -43,10 +43,36 @@ end
 
     models = read_models(
         [:det1, :det2, :det3],
-        [path*"/z_-1_phi_0", path*"/z_1_phi_0", path*"/z_-1_phi_1", path*"/z_1_phi_1"],
+        [
+            path*"/hit_files/z_-1_phi_0",
+            path*"/hit_files/z_1_phi_0",
+            path*"/hit_files/z_-1_phi_1",
+            path*"/hit_files/z_1_phi_1",
+        ],
         2600:20:2620,
         r".*z_([-\d.]+)_phi_([-\d.]+)",
     )
 
     @test all(mod isa GeneralisedHistogram for mod in values(models))
+end
+
+@testset "test_read_histograms" begin
+
+    path = joinpath(@__DIR__, "test_files")
+    files = [
+        path*"/pdf_files/z_-1_phi_0.lh5",
+        path*"/pdf_files/z_1_phi_0.lh5",
+        path*"/pdf_files/z_-1_phi_1.lh5",
+        path*"/pdf_files/z_1_phi_1.lh5",
+    ]
+
+    @test CalibrationTemplateFits.read_hist("hit/det1", files[1]) isa Histogram
+    mods = read_models_hist(
+        ["det1", "det2", "det3"],
+        files,
+        2600:30:2630,
+        r".*z_([-\d.]+)_phi_([-\d.]+)",
+        "hit",
+    )
+    @test all(mod isa GeneralisedHistogram for mod in values(mods))
 end
