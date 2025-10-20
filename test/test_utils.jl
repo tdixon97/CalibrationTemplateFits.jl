@@ -55,7 +55,7 @@ end
     # 3. Input validation
     @testset "Validation" begin
         @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, 0.0:0.5:10.0)  # non-integer
-        @test_throws ArgumentErrorCalibrationTemplateFits.rebin_integer(h, [0, 5, 3, 10])  # unsorted
+        @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, [0, 5, 3, 10])  # unsorted
         @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, [-1, 5, 10])    # out of range
     end
 
