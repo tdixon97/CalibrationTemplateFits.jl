@@ -120,24 +120,25 @@ function read_models(
     if pattern === nothing
         pattern = r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)"
     end
-    
+
     n_dets = length(dets)
     outputs_array = Vector{Any}(undef, n_dets)
-    
-    @showprogress @threads for i in 1:n_dets
+
+    @showprogress @threads for i = 1:n_dets
         det = dets[i]
-    
+
         histograms = HistogramWithPars[]
         zs = Set{Float64}()
         φs = Set{Float64}()
-    
-        isempty(folders) && throw(ValueError("no folders found in the input path - check this!"))
-    
+
+        isempty(folders) &&
+            throw(ValueError("no folders found in the input path - check this!"))
+
         for folder in folders
             files = glob("*", folder)
             p_name = split(folder, "/")[end]
             z, φ = extract_mc_coords(String(p_name), pattern)
-    
+
             if !vary_fccd
                 energies = read_mc_files(det, files; field = "energy")
                 h = append!(Histogram(binning), energies)
@@ -148,16 +149,16 @@ function read_models(
                 energies = read_mc_files(det, files; field = "surface/energies")
                 dist = read_mc_files(det, files; field = "surface/dist_to_nplus")
                 bulk_energy = read_mc_files(det, files; field = "bulk_energy")
-    
-                for fccd in 0:0.2:2
+
+                for fccd = 0:0.2:2
                     energy = copy(bulk_energy)
                     for idx in eachindex(energy)
                         act = CalibrationTemplateFits.piecewise_linear_activeness.(
                             Float64.(dist[idx]);
-                           fccd = fccd,
-                            dlf = 0.5
-                       )
-                       if !isempty(act)
+                            fccd = fccd,
+                            dlf = 0.5,
+                        )
+                        if !isempty(act)
                             energy[idx] += sum(act .* energies[idx])
                         end
                     end
@@ -170,7 +171,7 @@ function read_models(
                 end
             end
         end
-    
+
         # build per-detector histogram
         outputs_array[i] = if !vary_fccd
             GeneralisedHistogram(histograms; z = _set2range(zs), φ = _set2range(φs))
@@ -180,9 +181,9 @@ function read_models(
             GeneralisedHistogram(histograms, kw)
         end
     end
-    
+
     # convert back to Dict keyed by det
-    outputs = Dict(dets[i] => outputs_array[i] for i in 1:n_dets)
+    outputs = Dict(dets[i] => outputs_array[i] for i = 1:n_dets)
 
     outputs
 end
@@ -198,56 +199,59 @@ function read_models_evt(
     binning::Union{AbstractVector,AbstractRange},
     det_map::Dict,
     pattern::Union{Regex,Nothing} = nothing,
-        
 )
 
     if pattern === nothing
         pattern = r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)"
     end
-    
+
     n_dets = length(dets)
     outputs_array = Vector{Any}(undef, n_dets)
     det_histograms = Dict(det=>HistogramWithPars[] for det in dets)
     det_zs = Dict(det=>Set{Float64}() for det in dets)
     det_φs = Dict(det=>Set{Float64}() for det in dets)
-    
-    isempty(folders) && throw(ValueError("no folders found in the input path - check this!"))
-    
+
+    isempty(folders) &&
+        throw(ValueError("no folders found in the input path - check this!"))
+
     #first loop over folders
-    
+
     for folder in folders
-        @info "   ... reading $folder"   
+        @info "   ... reading $folder"
         # read the data
         file_list = glob("*", folder)
-        data = read_data( "/", file_list)
+        data = read_data("/", file_list)
 
         p_name = split(folder, "/")[end]
         z, φ = extract_mc_coords(String(p_name), pattern)
 
-        for i in 1:n_dets
+        for i = 1:n_dets
             det = dets[i]
-        
+
             r = flatview(data.channel)
             energy = flatview(data.energy)
-            is_good =  flatview(data.is_good)
+            is_good = flatview(data.is_good)
             energy_sel = energy[(r .== det_map[det]) .& (is_good)]
 
             h = append!(Histogram(binning), energy_sel)
-                
+
             push!(det_histograms[det], HistogramWithPars(h, z = z, φ = φ))
             push!(det_zs[det], z)
             push!(det_φs[det], φ)
-        
+
         end
-    
+
     end
 
     outputs = Dict()
     for det in dets
         # build per-detector histogram
-        outputs[det] = GeneralisedHistogram(det_histograms[det]; z = _set2range(det_zs[det]), φ = _set2range(det_φs[det]))
+        outputs[det] = GeneralisedHistogram(
+            det_histograms[det];
+            z = _set2range(det_zs[det]),
+            φ = _set2range(det_φs[det]),
+        )
     end
 
     outputs
 end
-

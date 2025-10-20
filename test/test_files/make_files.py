@@ -6,7 +6,9 @@ import os
 # make evt tier data
 energy = ak.Array([[100],[200,300],[1000],[2000,3000]])
 rawid = ak.Array([[1],[1,2],[3],[1,3]])
-data = ak.Array({"geds":{"energy":energy,"rawid":rawid},"trigger":{"is_forced":[False,False,True,False]},
+is_good = ak.Array([[True],[True,True],[True],[True,True]])
+
+data = ak.Array({"geds":{"energy":energy,"rawid":rawid,"quality":{"is_good_channel":is_good}},"trigger":{"is_forced":[False,False,True,False]},
                 "coincident":{"puls":[False,False,False,False]}})
 
 data_table = Table(data)

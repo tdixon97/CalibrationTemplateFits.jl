@@ -14,23 +14,23 @@ function parse_commandline()
         help = "Path to YAML configuration file"
         arg_type = String
         required = true
-        
+
         "--output", "-o"
         help = "Path to output folder"
         arg_type = String
         required = true
-        
+
         "--pos", "-p"
         help = "Position to use"
         arg_type = Int
         required = true
-        
+
         "--binning", "-b"
         help = "Binning to use, either range or list"
         arg_type = String
         required = false
         default = "2605:20:2625"
-        
+
         "--vary-fccd", "-f"
         help = "Vary the FCCD"
         action = :store_true
@@ -54,16 +54,18 @@ function main()
     chmap = readprops(cfg.channel_map)
 
     pos = args["pos"]
-    
+
     dets = [ch for ch in keys(chmap) if chmap[ch].system=="geds"]
-    
+
     # read data
     @info "... read the data"
     binning = parse_binning(args["binning"])
     rawid_map = Dict(det=>chmap[det].daq.rawid for det in dets)
 
-    list = haskey(cfg, "file-list") ? cfg["file-list"] : basename.(glob("*.lh5", cfg.data_path))
-    
+    list =
+        haskey(cfg, "file-list") ? cfg["file-list"] :
+        basename.(glob("*.lh5", cfg.data_path))
+
     @info "... read mc"
     models = read_models_evt(
         dets,
@@ -73,24 +75,19 @@ function main()
         r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
         #vary_fccd = args["vary-fccd"]
     )
-    
-    # and the histograms
-    data_hists = read_data_histograms(
-        cfg.data_path,
-        list,
-        rawid_map,
-        binning,
-    )
 
-    
-    
+    # and the histograms
+    data_hists = read_data_histograms(cfg.data_path, list, rawid_map, binning)
+
+
+
     @info "... make likelihood"
     likelihood =
         build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
     # this can be in config but its hard to keep type stability
-    prior = build_prior(dets,vary_fccd = args["vary-fccd"])
-    
+    prior = build_prior(dets, vary_fccd = args["vary-fccd"])
+
     posterior = PosteriorMeasure(likelihood, prior)
 
     # sample
@@ -103,7 +100,7 @@ function main()
     @info "... make some summary plots"
     dir = args["output"]
     isdir(dir) || mkdir(dir)
-    make_summary_plots(dir*"/plots.pdf", samples, dets,args["vary-fccd"])
+    make_summary_plots(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
 
     # save
     @info "... now save samples"

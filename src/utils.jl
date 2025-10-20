@@ -54,3 +54,41 @@ function get_data_histogram(rawid::Int, data::Table, range)
 
     return append!(Histogram(range), energy_sel)
 end
+
+
+"""
+    rebin_integer(h::Histogram, new_edges)
+
+Rebin a 1D `StatsBase.Histogram` `h` to integer bin edges given by `new_edges`,
+which can be an `AbstractRange` or a `Vector{Int}`.
+
+Throws an error if `new_edges` are not integers, not sorted, or fall outside the
+range of `h`.
+"""
+function rebin_integer(h::Histogram, new_edges)
+    # Validate bin edges
+    if !(new_edges isa AbstractVector{<:Integer} || new_edges isa AbstractRange{<:Integer})
+        throw(ArgumentError("new_edges must be an AbstractRange or Vector of Ints"))
+    end
+    if !issorted(new_edges)
+        throw(ArgumentError("new_edges must be sorted"))
+    end
+
+    # Check that new bin edges are within old edges
+    old_edges = h.edges[1]
+    if first(new_edges) < first(old_edges) || last(new_edges) > last(old_edges)
+        throw(ArgumentError("new_edges must be within the range of the original histogram"))
+    end
+
+    # Create a new histogram and fill it
+    rebinned = fit(Histogram, Float64[], new_edges)
+    for (count, (lo, hi)) in zip(h.weights, zip(old_edges[1:(end-1)], old_edges[2:end]))
+        mid = (lo + hi) / 2
+        bin_index = searchsortedlast(new_edges, mid)
+        if bin_index < length(new_edges)
+            rebinned.weights[bin_index] += count
+        end
+    end
+
+    return rebinned
+end
