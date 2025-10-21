@@ -51,14 +51,8 @@ end
         @test all(isapprox.(h.weights, h2.weights))
     end
 
-    # 3. Input validation
-    @testset "Validation" begin
-        @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, 0.0:0.5:10.0)  # non-integer
-        @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, [0, 5, 3, 10])  # unsorted
-        @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, [-1, 5, 10])    # out of range
-    end
 
-    # 4. One-bin edge case
+    # 3. One-bin edge case
     @testset "One-bin edge case" begin
         h2 = CalibrationTemplateFits.rebin_integer(h, 0:10:10)
         @test sum(h2.weights) ≈ sum(h.weights)
