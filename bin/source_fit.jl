@@ -35,6 +35,10 @@ function parse_commandline()
         help = "Vary the FCCD"
         action = :store_true
 
+        "--read-samples", "-s"
+        help = "Only read the samples (to make summary plots)"
+        action = :store_true
+
     end
     return parse_args(s)
 end
@@ -45,40 +49,31 @@ function main()
     args = parse_commandline()
     cfg = readprops(args["config"])
     s = YAML.write(Dict(cfg))
+
     @info "Using config \n$s"
 
-
-
-    # get the channel map
-    @info "... reading channel map"
-    chmap = readprops(cfg.channel_map)
-
     pos = args["pos"]
-
-    dets = [ch for ch in keys(chmap) if chmap[ch].system=="geds"]
+    dets = YAML.load_file(cfg.det_list)
+    @info "... using detectors $dets"
 
     # read data
     @info "... read the data"
     binning = parse_binning(args["binning"])
-    rawid_map = Dict(det=>chmap[det].daq.rawid for det in dets)
+    data_hists = read_data_histograms(cfg.data_path, "hist/hit", dets, binning)
+
 
     list =
         haskey(cfg, "file-list") ? cfg["file-list"] :
         basename.(glob("*.lh5", cfg.data_path))
 
     @info "... read mc"
-    models = read_models_evt(
+    models = read_models_hist(
         dets,
         glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
         binning,
-        rawid_map,
         r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
-        #vary_fccd = args["vary-fccd"]
+        "hist/hit",
     )
-
-    # and the histograms
-    data_hists = read_data_histograms(cfg.data_path, list, rawid_map, binning)
-
 
 
     @info "... make likelihood"
@@ -92,19 +87,32 @@ function main()
 
     # sample
     @info "... start sampling"
-    samples = bat_sample(
-        posterior,
-        TransformedMCMC(proposal = RandomWalk(), nsteps = 10^6, nchains = 4),
-    ).result
 
-    @info "... make some summary plots"
     dir = args["output"]
     isdir(dir) || mkdir(dir)
-    make_summary_plots(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
 
-    # save
-    @info "... now save samples"
-    bat_write(dir*"/samples.h5", samples)
+    if (!args["read-samples"])
+        samples = bat_sample(
+            posterior,
+            TransformedMCMC(proposal = RandomWalk(), nsteps = 10^6, nchains = 4),
+        ).result
+        @info "... now save samples"
+
+        bat_write(dir*"/samples.h5", samples)
+    else
+        samples = bat_read(dir*"/samples.h5").result
+    end
+
+    @info "... make some summary plots"
+    plot_posteriors(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
+    plot_reconstruction(
+        data_hists,
+        models,
+        dir*"/best_fit.pdf",
+        BAT.mode(samples),
+        cfg.livetime/cfg.n_sim,
+    )
+
 
 end
 

@@ -13,13 +13,18 @@ export read_models_hist
 
 export build_likelihood
 export spectrum_likelihood
-export make_summary_plots
+export plot_posteriors
+export plot_reconstruction
 export build_prior
+
+export normalised_poisson_residual
 
 include("generalised_histogram.jl")
 include("functions.jl")
 include("likelihood.jl")
 include("io.jl")
+include("stats.jl")
+
 include("utils.jl")
 include("plots.jl")
 

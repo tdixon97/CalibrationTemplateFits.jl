@@ -67,12 +67,6 @@ range of `h`.
 """
 function rebin_integer(h::Histogram, new_edges)
     # Validate bin edges
-    if !(new_edges isa AbstractVector{<:Integer} || new_edges isa AbstractRange{<:Integer})
-        throw(ArgumentError("new_edges must be an AbstractRange or Vector of Ints"))
-    end
-    if !issorted(new_edges)
-        throw(ArgumentError("new_edges must be sorted"))
-    end
 
     # Check that new bin edges are within old edges
     old_edges = h.edges[1]
