@@ -35,6 +35,10 @@ function parse_commandline()
         help = "Vary the FCCD"
         action = :store_true
 
+        "--read-samples", "-s"
+        help = "Only read the samples (to make summary plots)"
+        action = :store_true
+
     end
     return parse_args(s)
 end
@@ -77,17 +81,12 @@ function main()
     # and the histograms
     data_hists = make_data_histograms(cfg.data_path, list, rawid_map, binning)
 
-
-
     @info "... make likelihood"
     likelihood =
         build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
     # extract the grid values from the mc files
-    range_z = models[dets[1]].grid.z
-    range_φ = models[dets[1]].grid.φ
-    zlims = (first(range_z),last(range_z))
-    φlims = (first(range_φ),last(range_φ))
+    zlims, φlims = extract_grid_values(models, dets[1])
 
     # this can be in config but its hard to keep type stability
     prior = build_prior(dets, vary_fccd = args["vary-fccd"], zlims = zlims, φlims = φlims)
@@ -96,19 +95,32 @@ function main()
 
     # sample
     @info "... start sampling"
-    samples = bat_sample(
-        posterior,
-        TransformedMCMC(proposal = RandomWalk(), nsteps = 10^6, nchains = 4),
-    ).result
 
-    @info "... make some summary plots"
     dir = args["output"]
     isdir(dir) || mkdir(dir)
-    make_summary_plots(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
 
-    # save
-    @info "... now save samples"
-    bat_write(dir*"/samples.h5", samples)
+    if (!args["read-samples"])
+        samples = bat_sample(
+            posterior,
+            TransformedMCMC(proposal = RandomWalk(), nsteps = 10^6, nchains = 4),
+        ).result
+        @info "... now save samples"
+
+        bat_write(dir*"/samples.h5", samples)
+    else
+        samples = bat_read(dir*"/samples.h5").result
+    end
+
+    @info "... make some summary plots"
+    #plot_posteriors(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
+    plot_reconstruction_makie(
+        data_hists,
+        models,
+        dir*"/best_fit.pdf",
+        BAT.mode(samples),
+        cfg.livetime/cfg.n_sim,
+    )
+
 
 end
 
