@@ -85,7 +85,7 @@ function main()
     likelihood =
         build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
-    # extract the grid values from the mc files
+    # extract the grid values from the mc files.
     range_z = models[dets[1]].grid.z
     range_φ = models[dets[1]].grid.φ
     zlims = (first(range_z),last(range_z))
