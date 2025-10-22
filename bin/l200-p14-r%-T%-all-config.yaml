@@ -1,0 +1,4506 @@
+BSLN01:
+  name: BSLN01
+  system: bsln
+  rate_in_Hz: 0.1
+  daq:
+    crate: 1
+    card:
+      id: 0
+      address: "0x110"
+      serialno: null
+    channel: 0
+    rawid: 1027200
+PULS01:
+  name: PULS01
+  system: puls
+  rate_in_Hz: 0.05
+  daq:
+    crate: 1
+    card:
+      id: 0
+      address: "0x110"
+      serialno: null
+    channel: 1
+    rawid: 1027201
+MUON01:
+  name: MUON01
+  system: auxs
+  daq:
+    crate: 1
+    card:
+      id: 0
+      address: "0x110"
+      serialno: null
+    channel: 2
+    rawid: 1027202
+PULS01ANA:
+  name: PULS01ANA
+  system: puls
+  rate_in_Hz: 0.05
+  daq:
+    crate: 1
+    card:
+      id: 0
+      address: "0x110"
+      serialno: null
+    channel: 3
+    rawid: 1027203
+DUMMY00:
+  name: DUMMY00
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 1
+      address: "0x410"
+      serialno: null
+    channel: 0
+    rawid: 1104000
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 0
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+DUMMY01:
+  name: DUMMY01
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 1
+      address: "0x410"
+      serialno: null
+    channel: 2
+    rawid: 1104002
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 2
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+DUMMY02:
+  name: DUMMY02
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 1
+      address: "0x410"
+      serialno: null
+    channel: 3
+    rawid: 1104003
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 3
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+DUMMY03:
+  name: DUMMY03
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 1
+      address: "0x410"
+      serialno: null
+    channel: 4
+    rawid: 1104004
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 4
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+B00032C:
+  name: B00032C
+  system: geds
+  location:
+    string: 4
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 1
+      address: "0x410"
+      serialno: null
+    channel: 5
+    rawid: 1104005
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 0
+    filter:
+      id: "005"
+      channel: 0
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 0
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 5
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+V07302A:
+  name: V07302A
+  system: geds
+  location:
+    string: 4
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 2
+      address: "0x420"
+      serialno: null
+    channel: 0
+    rawid: 1105600
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 1
+    filter:
+      id: "005"
+      channel: 1
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 1
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 6
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+V00050A:
+  name: V00050A
+  system: geds
+  location:
+    string: 4
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 2
+      address: "0x420"
+      serialno: null
+    channel: 1
+    rawid: 1105601
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 2
+    filter:
+      id: "005"
+      channel: 2
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 2
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 0
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+V05267A:
+  name: V05267A
+  system: geds
+  location:
+    string: 4
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 2
+      address: "0x420"
+      serialno: null
+    channel: 2
+    rawid: 1105602
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 3
+    filter:
+      id: "005"
+      channel: 3
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 3
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 1
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+DUMMY04:
+  name: DUMMY04
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 2
+      address: "0x420"
+      serialno: null
+    channel: 3
+    rawid: 1105603
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 2
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+V00048A:
+  name: V00048A
+  system: geds
+  location:
+    string: 4
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 2
+      address: "0x420"
+      serialno: null
+    channel: 4
+    rawid: 1105604
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 4
+    filter:
+      id: "005"
+      channel: 4
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 4
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 3
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+V00048B:
+  name: V00048B
+  system: geds
+  location:
+    string: 4
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 2
+      address: "0x420"
+      serialno: null
+    channel: 5
+    rawid: 1105605
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 5
+    filter:
+      id: "005"
+      channel: 5
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 5
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 4
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+V01240A:
+  name: V01240A
+  system: geds
+  location:
+    string: 4
+    position: 7
+  daq:
+    crate: 0
+    card:
+      id: 3
+      address: "0x430"
+      serialno: null
+    channel: 0
+    rawid: 1107200
+  voltage:
+    card:
+      id: 0
+      serialno: null
+    channel: 6
+    filter:
+      id: "005"
+      channel: 6
+    flange:
+      bundle: D
+      sub_bundle: 1
+      channel: 6
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 5
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+DUMMY05:
+  name: DUMMY05
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 3
+      address: "0x430"
+      serialno: null
+    channel: 1
+    rawid: 1107201
+  electronics:
+    cc4:
+      id: E5
+      name: N/A
+      channel: 6
+      position: Right
+    buffer_card:
+      id: "14"
+      raspberry_pi: 2
+      address: 9
+      flange: R1
+      cable: 3
+DUMMY06:
+  name: DUMMY06
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 1
+      address: "0x410"
+      serialno: null
+    channel: 1
+    rawid: 1104001
+  electronics:
+    cc4:
+      id: B5
+      name: N/A
+      channel: 1
+      position: Left
+    buffer_card:
+      id: 8
+      raspberry_pi: 1
+      address: 4
+      flange: S0
+      cable: 2
+V03421A:
+  name: V03421A
+  system: geds
+  location:
+    string: 5
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 3
+      address: "0x430"
+      serialno: null
+    channel: 2
+    rawid: 1107202
+  voltage:
+    card:
+      id: 1
+      serialno: null
+    channel: 1
+    filter:
+      id: "006"
+      channel: 0
+    flange:
+      bundle: C
+      sub_bundle: 3
+      channel: 0
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 0
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+V03422A:
+  name: V03422A
+  system: geds
+  location:
+    string: 5
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 3
+      address: "0x430"
+      serialno: null
+    channel: 3
+    rawid: 1107203
+  voltage:
+    card:
+      id: 1
+      serialno: null
+    channel: 2
+    filter:
+      id: "006"
+      channel: 1
+    flange:
+      bundle: C
+      sub_bundle: 3
+      channel: 1
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 1
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+V10447B:
+  name: V10447B
+  system: geds
+  location:
+    string: 5
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 3
+      address: "0x430"
+      serialno: null
+    channel: 4
+    rawid: 1107204
+  voltage:
+    card:
+      id: 1
+      serialno: null
+    channel: 3
+    filter:
+      id: "006"
+      channel: 2
+    flange:
+      bundle: C
+      sub_bundle: 3
+      channel: 2
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 2
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+V11924A:
+  name: V11924A
+  system: geds
+  location:
+    string: 5
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 3
+      address: "0x430"
+      serialno: null
+    channel: 5
+    rawid: 1107205
+  voltage:
+    card:
+      id: 1
+      serialno: null
+    channel: 4
+    filter:
+      id: "006"
+      channel: 3
+    flange:
+      bundle: C
+      sub_bundle: 3
+      channel: 3
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 3
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+V08682A:
+  name: V08682A
+  system: geds
+  location:
+    string: 5
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 4
+      address: "0x440"
+      serialno: null
+    channel: 0
+    rawid: 1108800
+  voltage:
+    card:
+      id: 1
+      serialno: null
+    channel: 5
+    filter:
+      id: "006"
+      channel: 4
+    flange:
+      bundle: C
+      sub_bundle: 3
+      channel: 4
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 4
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+V09724A:
+  name: V09724A
+  system: geds
+  location:
+    string: 5
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 4
+      address: "0x440"
+      serialno: null
+    channel: 1
+    rawid: 1108801
+  voltage:
+    card:
+      id: 1
+      serialno: null
+    channel: 6
+    filter:
+      id: "006"
+      channel: 5
+    flange:
+      bundle: C
+      sub_bundle: 3
+      channel: 5
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 5
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+DUMMY07:
+  name: DUMMY07
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 4
+      address: "0x440"
+      serialno: null
+    channel: 2
+    rawid: 1108802
+  electronics:
+    cc4:
+      id: E4
+      name: "10"
+      channel: 6
+      position: Right
+    buffer_card:
+      id: "22"
+      raspberry_pi: 2
+      address: 1
+      flange: R3
+      cable: 4
+V02160A:
+  name: V02160A
+  system: geds
+  location:
+    string: 6
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 4
+      address: "0x440"
+      serialno: null
+    channel: 3
+    rawid: 1108803
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 0
+    filter:
+      id: 8
+      channel: 4
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 0
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 0
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+V02162B:
+  name: V02162B
+  system: geds
+  location:
+    string: 6
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 4
+      address: "0x440"
+      serialno: null
+    channel: 4
+    rawid: 1108804
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 1
+    filter:
+      id: 8
+      channel: 5
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 1
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 1
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+V05612A:
+  name: V05612A
+  system: geds
+  location:
+    string: 6
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 4
+      address: "0x440"
+      serialno: null
+    channel: 5
+    rawid: 1108805
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 2
+    filter:
+      id: 8
+      channel: 6
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 3
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 2
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+V05266A:
+  name: V05266A
+  system: geds
+  location:
+    string: 6
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 5
+      address: "0x450"
+      serialno: null
+    channel: 0
+    rawid: 1110400
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 3
+    filter:
+      id: "007"
+      channel: 2
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 4
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 3
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+V07647A:
+  name: V07647A
+  system: geds
+  location:
+    string: 6
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 5
+      address: "0x450"
+      serialno: null
+    channel: 1
+    rawid: 1110401
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 4
+    filter:
+      id: "007"
+      channel: 3
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 5
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 4
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+V07647B:
+  name: V07647B
+  system: geds
+  location:
+    string: 6
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 5
+      address: "0x450"
+      serialno: null
+    channel: 2
+    rawid: 1110402
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 5
+    filter:
+      id: "007"
+      channel: 4
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 6
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 5
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+V07302B:
+  name: V07302B
+  system: geds
+  location:
+    string: 6
+    position: 7
+  daq:
+    crate: 0
+    card:
+      id: 5
+      address: "0x450"
+      serialno: null
+    channel: 3
+    rawid: 1110403
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 6
+    filter:
+      id: "007"
+      channel: 5
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 7
+  electronics:
+    cc4:
+      id: F4
+      name: "15"
+      channel: 6
+      position: Right
+    buffer_card:
+      id: "23"
+      raspberry_pi: 2
+      address: 5
+      flange: R2
+      cable: 5
+DUMMY08:
+  name: DUMMY08
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 5
+      address: "0x450"
+      serialno: null
+    channel: 4
+    rawid: 1110404
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 0
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+DUMMY09:
+  name: DUMMY09
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 5
+      address: "0x450"
+      serialno: null
+    channel: 5
+    rawid: 1110405
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 1
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+DUMMY10:
+  name: DUMMY10
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 6
+      address: "0x460"
+      serialno: null
+    channel: 0
+    rawid: 1112000
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 2
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+V05266B:
+  name: V05266B
+  system: geds
+  location:
+    string: 6
+    position: 8
+  daq:
+    crate: 0
+    card:
+      id: 6
+      address: "0x460"
+      serialno: null
+    channel: 1
+    rawid: 1112001
+  voltage:
+    card:
+      id: 2
+      serialno: null
+    channel: 7
+    filter:
+      id: "007"
+      channel: 6
+    flange:
+      bundle: C
+      sub_bundle: 2
+      channel: 8
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 3
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+DUMMY11:
+  name: DUMMY11
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 6
+      address: "0x460"
+      serialno: null
+    channel: 2
+    rawid: 1112002
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 4
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+B00000C:
+  name: B00000C
+  system: geds
+  location:
+    string: 8
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 7
+      address: "0x470"
+      serialno: null
+    channel: 5
+    rawid: 1113605
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 0
+    filter:
+      id: "013"
+      channel: 3
+    flange:
+      bundle: A
+      sub_bundle: 3
+      channel: 7
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 6
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+B00061B:
+  name: B00061B
+  system: geds
+  location:
+    string: 8
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 6
+      address: "0x460"
+      serialno: null
+    channel: 3
+    rawid: 1112003
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 1
+    filter:
+      id: "013"
+      channel: 5
+    flange:
+      bundle: A
+      sub_bundle: 4
+      channel: 6
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 5
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+B00076C:
+  name: B00076C
+  system: geds
+  location:
+    string: 8
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 6
+      address: "0x460"
+      serialno: null
+    channel: 4
+    rawid: 1112004
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 3
+    filter:
+      id: "013"
+      channel: 7
+    flange:
+      bundle: A
+      sub_bundle: 4
+      channel: 1
+  electronics:
+    cc4:
+      id: E2
+      name: "13"
+      channel: 6
+      position: Right
+    buffer_card:
+      id: "21"
+      raspberry_pi: 2
+      address: 0
+      flange: R7
+      cable: 7
+B00079B:
+  name: B00079B
+  system: geds
+  location:
+    string: 8
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 6
+      address: "0x460"
+      serialno: null
+    channel: 5
+    rawid: 1112005
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 4
+    filter:
+      id: "013"
+      channel: 0
+    flange:
+      bundle: A
+      sub_bundle: 4
+      channel: 3
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 0
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+B00079C:
+  name: B00079C
+  system: geds
+  location:
+    string: 8
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 7
+      address: "0x470"
+      serialno: null
+    channel: 0
+    rawid: 1113600
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 5
+    filter:
+      id: "013"
+      channel: 1
+    flange:
+      bundle: A
+      sub_bundle: 4
+      channel: 4
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 1
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+DUMMY12:
+  name: DUMMY12
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 7
+      address: "0x470"
+      serialno: null
+    channel: 1
+    rawid: 1113601
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 2
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+DUMMY13:
+  name: DUMMY13
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 7
+      address: "0x470"
+      serialno: null
+    channel: 2
+    rawid: 1113602
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 3
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+DUMMY14:
+  name: DUMMY14
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 7
+      address: "0x470"
+      serialno: null
+    channel: 3
+    rawid: 1113603
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 4
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+V01404A:
+  name: V01404A
+  system: geds
+  location:
+    string: 8
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 7
+      address: "0x470"
+      serialno: null
+    channel: 4
+    rawid: 1113604
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 2
+    filter:
+      id: "013"
+      channel: 2
+    flange:
+      bundle: A
+      sub_bundle: 4
+      channel: 5
+  electronics:
+    cc4:
+      id: A1
+      name: "05"
+      channel: 5
+      position: Left
+    buffer_card:
+      id: "24"
+      raspberry_pi: 1
+      address: 7
+      flange: S9
+      cable: 8
+B00000D:
+  name: B00000D
+  system: geds
+  location:
+    string: 10
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 8
+      address: "0x480"
+      serialno: null
+    channel: 0
+    rawid: 1115200
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 6
+    filter:
+      id: "010"
+      channel: 5
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 3
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 0
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+DUMMY15:
+  name: DUMMY15
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 8
+      address: "0x480"
+      serialno: null
+    channel: 1
+    rawid: 1115201
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 1
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+B00002C:
+  name: B00002C
+  system: geds
+  location:
+    string: 10
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 8
+      address: "0x480"
+      serialno: null
+    channel: 2
+    rawid: 1115202
+  voltage:
+    card:
+      id: 3
+      serialno: null
+    channel: 7
+    filter:
+      id: "010"
+      channel: 6
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 4
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 2
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+B00035A:
+  name: B00035A
+  system: geds
+  location:
+    string: 10
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 8
+      address: "0x480"
+      serialno: null
+    channel: 3
+    rawid: 1115203
+  voltage:
+    card:
+      id: 4
+      serialno: null
+    channel: 0
+    filter:
+      id: "010"
+      channel: 7
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 5
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 3
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+B00035B:
+  name: B00035B
+  system: geds
+  location:
+    string: 10
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 8
+      address: "0x480"
+      serialno: null
+    channel: 4
+    rawid: 1115204
+  voltage:
+    card:
+      id: 4
+      serialno: null
+    channel: 1
+    filter:
+      id: "000"
+      channel: 0
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 6
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 4
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+V00050B:
+  name: V00050B
+  system: geds
+  location:
+    string: 10
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 8
+      address: "0x480"
+      serialno: null
+    channel: 5
+    rawid: 1115205
+  voltage:
+    card:
+      id: 4
+      serialno: null
+    channel: 2
+    filter:
+      id: "000"
+      channel: 1
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 7
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 5
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+V04549A:
+  name: V04549A
+  system: geds
+  location:
+    string: 10
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 9
+      address: "0x490"
+      serialno: null
+    channel: 0
+    rawid: 1116800
+  voltage:
+    card:
+      id: 4
+      serialno: null
+    channel: 3
+    filter:
+      id: "000"
+      channel: 2
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 8
+  electronics:
+    cc4:
+      id: B1
+      name: "02"
+      channel: 6
+      position: Left
+    buffer_card:
+      id: "11"
+      raspberry_pi: 1
+      address: 2
+      flange: S8
+      cable: 10
+DUMMY16:
+  name: DUMMY16
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 9
+      address: "0x490"
+      serialno: null
+    channel: 1
+    rawid: 1116801
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 0
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+V07298B:
+  name: V07298B
+  system: geds
+  location:
+    string: 10
+    position: 7
+  daq:
+    crate: 0
+    card:
+      id: 9
+      address: "0x490"
+      serialno: null
+    channel: 2
+    rawid: 1116802
+  voltage:
+    card:
+      id: 4
+      serialno: null
+    channel: 4
+    filter:
+      id: "000"
+      channel: 3
+    flange:
+      bundle: A
+      sub_bundle: 2
+      channel: 9
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 1
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+V06643A:
+  name: V06643A
+  system: geds
+  location:
+    string: 10
+    position: 8
+  daq:
+    crate: 0
+    card:
+      id: 9
+      address: "0x490"
+      serialno: null
+    channel: 3
+    rawid: 1116803
+  voltage:
+    card:
+      id: 4
+      serialno: null
+    channel: 5
+    filter:
+      id: "000"
+      channel: 4
+    flange:
+      bundle: A
+      sub_bundle: 3
+      channel: 0
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 2
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+DUMMY17:
+  name: DUMMY17
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 9
+      address: "0x490"
+      serialno: null
+    channel: 4
+    rawid: 1116804
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 3
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+DUMMY18:
+  name: DUMMY18
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 9
+      address: "0x490"
+      serialno: null
+    channel: 5
+    rawid: 1116805
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 4
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+DUMMY19:
+  name: DUMMY19
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 10
+      address: "0x4a0"
+      serialno: null
+    channel: 0
+    rawid: 1118400
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 5
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+DUMMY20:
+  name: DUMMY20
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 10
+      address: "0x4a0"
+      serialno: null
+    channel: 1
+    rawid: 1118401
+  electronics:
+    cc4:
+      id: B2
+      name: N/A
+      channel: 6
+      position: Left
+    buffer_card:
+      id: "29"
+      raspberry_pi: 1
+      address: 9
+      flange: S6
+      cable: 11
+V08682B:
+  name: V08682B
+  system: geds
+  location:
+    string: 11
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 10
+      address: "0x4a0"
+      serialno: null
+    channel: 2
+    rawid: 1118402
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 0
+    filter:
+      id: "003"
+      channel: 0
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 0
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 0
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V10784A:
+  name: V10784A
+  system: geds
+  location:
+    string: 11
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 10
+      address: "0x4a0"
+      serialno: null
+    channel: 3
+    rawid: 1118403
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 1
+    filter:
+      id: "003"
+      channel: 1
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 1
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 1
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V11925A:
+  name: V11925A
+  system: geds
+  location:
+    string: 11
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 10
+      address: "0x4a0"
+      serialno: null
+    channel: 4
+    rawid: 1118404
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 2
+    filter:
+      id: "003"
+      channel: 2
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 2
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 2
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V11947B:
+  name: V11947B
+  system: geds
+  location:
+    string: 11
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 10
+      address: "0x4a0"
+      serialno: null
+    channel: 5
+    rawid: 1118405
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 3
+    filter:
+      id: "003"
+      channel: 3
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 3
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 3
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V09372A:
+  name: V09372A
+  system: geds
+  location:
+    string: 11
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 11
+      address: "0x4b0"
+      serialno: null
+    channel: 0
+    rawid: 1120000
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 4
+    filter:
+      id: "003"
+      channel: 4
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 4
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 4
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V09374A:
+  name: V09374A
+  system: geds
+  location:
+    string: 11
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 11
+      address: "0x4b0"
+      serialno: null
+    channel: 1
+    rawid: 1120001
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 5
+    filter:
+      id: "003"
+      channel: 5
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 5
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 5
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V02160B:
+  name: V02160B
+  system: geds
+  location:
+    string: 12
+    position: 1
+  daq:
+    crate: 0
+    card:
+      id: 11
+      address: "0x4b0"
+      serialno: null
+    channel: 2
+    rawid: 1120002
+  voltage:
+    card:
+      id: 6
+      serialno: null
+    channel: 4
+    filter:
+      id: "011"
+      channel: 6
+    flange:
+      bundle: B
+      sub_bundle: 2
+      channel: 4
+  electronics:
+    cc4:
+      id: B3
+      name: "07"
+      channel: 6
+      position: Left
+    buffer_card:
+      id: "05"
+      raspberry_pi: 1
+      address: 3
+      flange: S5
+      cable: 12
+V04199A:
+  name: V04199A
+  system: geds
+  location:
+    string: 12
+    position: 2
+  daq:
+    crate: 0
+    card:
+      id: 11
+      address: "0x4b0"
+      serialno: null
+    channel: 3
+    rawid: 1120003
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 7
+    filter:
+      id: "011"
+      channel: 1
+    flange:
+      bundle: B
+      sub_bundle: 1
+      channel: 9
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 0
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+V04545A:
+  name: V04545A
+  system: geds
+  location:
+    string: 12
+    position: 3
+  daq:
+    crate: 0
+    card:
+      id: 11
+      address: "0x4b0"
+      serialno: null
+    channel: 4
+    rawid: 1120004
+  voltage:
+    card:
+      id: 6
+      serialno: null
+    channel: 0
+    filter:
+      id: "011"
+      channel: 2
+    flange:
+      bundle: B
+      sub_bundle: 2
+      channel: 0
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 1
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+V05267B:
+  name: V05267B
+  system: geds
+  location:
+    string: 12
+    position: 4
+  daq:
+    crate: 0
+    card:
+      id: 11
+      address: "0x4b0"
+      serialno: null
+    channel: 5
+    rawid: 1120005
+  voltage:
+    card:
+      id: 5
+      serialno: null
+    channel: 6
+    filter:
+      id: "011"
+      channel: 0
+    flange:
+      bundle: B
+      sub_bundle: 2
+      channel: 6
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 2
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+V07646A:
+  name: V07646A
+  system: geds
+  location:
+    string: 12
+    position: 5
+  daq:
+    crate: 0
+    card:
+      id: 12
+      address: "0x4c0"
+      serialno: null
+    channel: 0
+    rawid: 1121600
+  voltage:
+    card:
+      id: 6
+      serialno: null
+    channel: 2
+    filter:
+      id: "011"
+      channel: 4
+    flange:
+      bundle: B
+      sub_bundle: 2
+      channel: 2
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 3
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+V06659A:
+  name: V06659A
+  system: geds
+  location:
+    string: 12
+    position: 6
+  daq:
+    crate: 0
+    card:
+      id: 12
+      address: "0x4c0"
+      serialno: null
+    channel: 1
+    rawid: 1121601
+  voltage:
+    card:
+      id: 6
+      serialno: null
+    channel: 3
+    filter:
+      id: "011"
+      channel: 5
+    flange:
+      bundle: B
+      sub_bundle: 2
+      channel: 3
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 4
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+DUMMY21:
+  name: DUMMY21
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 12
+      address: "0x4c0"
+      serialno: null
+    channel: 2
+    rawid: 1121602
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 5
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+DUMMY22:
+  name: DUMMY22
+  system: auxs
+  daq:
+    crate: 0
+    card:
+      id: 12
+      address: "0x4c0"
+      serialno: null
+    channel: 3
+    rawid: 1121603
+  electronics:
+    cc4:
+      id: B4
+      name: N/A
+      channel: 6
+      position: Left
+    buffer_card:
+      id: "30"
+      raspberry_pi: 1
+      address: 5
+      flange: S2
+      cable: 14
+S060:
+  name: S060
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB015016
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 1
+      address: "0x210"
+      serialno: null
+    channel: 2
+    fc_channel: 0
+    rawid: 1052802
+  electronics:
+    card:
+      id: 0
+      serialno: null
+    channel: 2
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 3
+S061:
+  name: S061
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB015016
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 1
+      address: "0x210"
+      serialno: null
+    channel: 3
+    fc_channel: 1
+    rawid: 1052803
+  electronics:
+    card:
+      id: 0
+      serialno: null
+    channel: 3
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 4
+S055:
+  name: S055
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB005006
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 1
+      address: "0x210"
+      serialno: null
+    channel: 4
+    fc_channel: 2
+    rawid: 1052804
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 0
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 1
+S054:
+  name: S054
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB005006
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 1
+      address: "0x210"
+      serialno: null
+    channel: 5
+    fc_channel: 3
+    rawid: 1052805
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 1
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 2
+S028:
+  name: S028
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB007008
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 2
+      address: "0x220"
+      serialno: null
+    channel: 0
+    fc_channel: 4
+    rawid: 1054400
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 2
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 3
+S017:
+  name: S017
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB007008
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 2
+      address: "0x220"
+      serialno: null
+    channel: 1
+    fc_channel: 5
+    rawid: 1054401
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 3
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 4
+S083:
+  name: S083
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB017018
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 2
+      address: "0x220"
+      serialno: null
+    channel: 2
+    fc_channel: 6
+    rawid: 1054402
+  electronics:
+    card:
+      id: 0
+      serialno: null
+    channel: 2
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 9
+S073:
+  name: S073
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB017018
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 2
+      address: "0x220"
+      serialno: null
+    channel: 3
+    fc_channel: 7
+    rawid: 1054403
+  electronics:
+    card:
+      id: 0
+      serialno: null
+    channel: 9
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 10
+S071:
+  name: S071
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB001002
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 2
+      address: "0x220"
+      serialno: null
+    channel: 4
+    fc_channel: 8
+    rawid: 1054404
+  electronics:
+    card:
+      id: 0
+      serialno: null
+    channel: 10
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 11
+S070:
+  name: S070
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB001002
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 2
+      address: "0x220"
+      serialno: null
+    channel: 5
+    fc_channel: 9
+    rawid: 1054405
+  electronics:
+    card:
+      id: 0
+      serialno: null
+    channel: 11
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 12
+S067:
+  name: S067
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB021022
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 3
+      address: "0x230"
+      serialno: null
+    channel: 0
+    fc_channel: 10
+    rawid: 1056000
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 0
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 13
+S068:
+  name: S068
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB021022
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 3
+      address: "0x230"
+      serialno: null
+    channel: 1
+    fc_channel: 11
+    rawid: 1056001
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 1
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 14
+S090:
+  name: S090
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB003004
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 3
+      address: "0x230"
+      serialno: null
+    channel: 2
+    fc_channel: 12
+    rawid: 1056002
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 2
+    cable: spm
+    flange: top
+    dsub:
+      id: 1
+      pinpair: 15
+S029:
+  name: S029
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB003004
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 3
+      address: "0x230"
+      serialno: null
+    channel: 3
+    fc_channel: 13
+    rawid: 1056003
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 3
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 1
+S042:
+  name: S042
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB023024
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 3
+      address: "0x230"
+      serialno: null
+    channel: 4
+    fc_channel: 14
+    rawid: 1056004
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 4
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 2
+S041:
+  name: S041
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB023024
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 3
+      address: "0x230"
+      serialno: null
+    channel: 5
+    fc_channel: 15
+    rawid: 1056005
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 5
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 3
+S024:
+  name: S024
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB005006
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 4
+      address: "0x240"
+      serialno: null
+    channel: 0
+    fc_channel: 16
+    rawid: 1057600
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 6
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 4
+S023:
+  name: S023
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB005006
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 4
+      address: "0x240"
+      serialno: null
+    channel: 1
+    fc_channel: 17
+    rawid: 1057601
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 7
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 5
+S030:
+  name: S030
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB009010
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 4
+      address: "0x240"
+      serialno: null
+    channel: 2
+    fc_channel: 18
+    rawid: 1057602
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 4
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 5
+S031:
+  name: S031
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB009010
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 4
+      address: "0x240"
+      serialno: null
+    channel: 3
+    fc_channel: 19
+    rawid: 1057603
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 5
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 6
+S002:
+  name: S002
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB007008
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 4
+      address: "0x240"
+      serialno: null
+    channel: 4
+    fc_channel: 20
+    rawid: 1057604
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 10
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 8
+S003:
+  name: S003
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB007008
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 4
+      address: "0x240"
+      serialno: null
+    channel: 5
+    fc_channel: 21
+    rawid: 1057605
+  electronics:
+    card:
+      id: 1
+      serialno: null
+    channel: 11
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 9
+S032:
+  name: S032
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB009010
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 5
+      address: "0x250"
+      serialno: null
+    channel: 0
+    fc_channel: 22
+    rawid: 1059200
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 0
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 10
+S036:
+  name: S036
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB009010
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 5
+      address: "0x250"
+      serialno: null
+    channel: 1
+    fc_channel: 23
+    rawid: 1059201
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 1
+    cable: spm
+    flange: top
+    dsub:
+      id: 2
+      pinpair: 11
+S094:
+  name: S094
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB011012
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 5
+      address: "0x250"
+      serialno: null
+    channel: 2
+    fc_channel: 24
+    rawid: 1059202
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 6
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 7
+S027:
+  name: S027
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB011012
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 5
+      address: "0x250"
+      serialno: null
+    channel: 3
+    fc_channel: 25
+    rawid: 1059203
+  electronics:
+    card:
+      id: 5
+      serialno: null
+    channel: 7
+    cable: ge
+    flange: right
+    dsub:
+      id: 0
+      pinpair: 8
+S098:
+  name: S098
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB019020
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 5
+      address: "0x250"
+      serialno: null
+    channel: 4
+    fc_channel: 26
+    rawid: 1059204
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 0
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 1
+S008:
+  name: S008
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB019020
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 5
+      address: "0x250"
+      serialno: null
+    channel: 5
+    fc_channel: 27
+    rawid: 1059205
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 1
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 2
+S058:
+  name: S058
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB011012
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 6
+      address: "0x260"
+      serialno: null
+    channel: 0
+    fc_channel: 28
+    rawid: 1060800
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 6
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 1
+S057:
+  name: S057
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB011012
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 6
+      address: "0x260"
+      serialno: null
+    channel: 1
+    fc_channel: 29
+    rawid: 1060801
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 7
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 2
+S096:
+  name: S096
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB013014
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 6
+      address: "0x260"
+      serialno: null
+    channel: 2
+    fc_channel: 30
+    rawid: 1060802
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 8
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 3
+S095:
+  name: S095
+  system: spms
+  location:
+    barrel: IB
+    fiber: IB013014
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 6
+      address: "0x260"
+      serialno: null
+    channel: 3
+    fc_channel: 31
+    rawid: 1060803
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 9
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 4
+S099:
+  name: S099
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB025026
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 6
+      address: "0x260"
+      serialno: null
+    channel: 4
+    fc_channel: 32
+    rawid: 1060804
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 10
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 5
+S065:
+  name: S065
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB025026
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 6
+      address: "0x260"
+      serialno: null
+    channel: 5
+    fc_channel: 33
+    rawid: 1060805
+  electronics:
+    card:
+      id: 2
+      serialno: null
+    channel: 11
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 6
+S087:
+  name: S087
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB027028
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 7
+      address: "0x270"
+      serialno: null
+    channel: 0
+    fc_channel: 34
+    rawid: 1062400
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 0
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 7
+S082:
+  name: S082
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB027028
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 7
+      address: "0x270"
+      serialno: null
+    channel: 1
+    fc_channel: 35
+    rawid: 1062401
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 1
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 8
+S046:
+  name: S046
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB017018
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 7
+      address: "0x270"
+      serialno: null
+    channel: 2
+    fc_channel: 36
+    rawid: 1062402
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 2
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 3
+S047:
+  name: S047
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB017018
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 7
+      address: "0x270"
+      serialno: null
+    channel: 3
+    fc_channel: 37
+    rawid: 1062403
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 3
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 4
+S011:
+  name: S011
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB015016
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 7
+      address: "0x270"
+      serialno: null
+    channel: 4
+    fc_channel: 38
+    rawid: 1062404
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 4
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 5
+S012:
+  name: S012
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB015016
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 7
+      address: "0x270"
+      serialno: null
+    channel: 5
+    fc_channel: 39
+    rawid: 1062405
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 5
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 6
+S020:
+  name: S020
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB029030
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 8
+      address: "0x280"
+      serialno: null
+    channel: 0
+    fc_channel: 40
+    rawid: 1064000
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 6
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 13
+S080:
+  name: S080
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB029030
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 8
+      address: "0x280"
+      serialno: null
+    channel: 1
+    fc_channel: 41
+    rawid: 1064001
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 7
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 14
+S026:
+  name: S026
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB031032
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 8
+      address: "0x280"
+      serialno: null
+    channel: 2
+    fc_channel: 42
+    rawid: 1064002
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 8
+    cable: spm
+    flange: top
+    dsub:
+      id: 3
+      pinpair: 15
+S025:
+  name: S025
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB031032
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 8
+      address: "0x280"
+      serialno: null
+    channel: 3
+    fc_channel: 43
+    rawid: 1064003
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 9
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 1
+S015:
+  name: S015
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB033034
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 8
+      address: "0x280"
+      serialno: null
+    channel: 4
+    fc_channel: 44
+    rawid: 1064004
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 10
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 2
+S097:
+  name: S097
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB033034
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 8
+      address: "0x280"
+      serialno: null
+    channel: 5
+    fc_channel: 45
+    rawid: 1064005
+  electronics:
+    card:
+      id: 3
+      serialno: null
+    channel: 11
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 3
+S043:
+  name: S043
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB013014
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 9
+      address: "0x290"
+      serialno: null
+    channel: 0
+    fc_channel: 46
+    rawid: 1065600
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 6
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 7
+S040:
+  name: S040
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB013014
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 9
+      address: "0x290"
+      serialno: null
+    channel: 1
+    fc_channel: 47
+    rawid: 1065601
+  electronics:
+    card:
+      id: 6
+      serialno: null
+    channel: 7
+    cable: ge
+    flange: left
+    dsub:
+      id: 0
+      pinpair: 8
+S048:
+  name: S048
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB035036
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 9
+      address: "0x290"
+      serialno: null
+    channel: 2
+    fc_channel: 48
+    rawid: 1065602
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 2
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 6
+S049:
+  name: S049
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB035036
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 9
+      address: "0x290"
+      serialno: null
+    channel: 3
+    fc_channel: 49
+    rawid: 1065603
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 3
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 7
+S053:
+  name: S053
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB037038
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 9
+      address: "0x290"
+      serialno: null
+    channel: 4
+    fc_channel: 50
+    rawid: 1065604
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 4
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 8
+S052:
+  name: S052
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB037038
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 9
+      address: "0x290"
+      serialno: null
+    channel: 5
+    fc_channel: 51
+    rawid: 1065605
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 5
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 9
+S050:
+  name: S050
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB039040
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 10
+      address: "0x2A0"
+      serialno: null
+    channel: 0
+    fc_channel: 52
+    rawid: 1067200
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 6
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 10
+S051:
+  name: S051
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB039040
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 10
+      address: "0x2A0"
+      serialno: null
+    channel: 1
+    fc_channel: 53
+    rawid: 1067201
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 7
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 11
+S085:
+  name: S085
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB001002
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 10
+      address: "0x2A0"
+      serialno: null
+    channel: 2
+    fc_channel: 54
+    rawid: 1067202
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 8
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 12
+S086:
+  name: S086
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB001002
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 10
+      address: "0x2A0"
+      serialno: null
+    channel: 3
+    fc_channel: 55
+    rawid: 1067203
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 9
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 13
+S037:
+  name: S037
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB003004
+    position: top
+  daq:
+    crate: 2
+    card:
+      id: 10
+      address: "0x2A0"
+      serialno: null
+    channel: 4
+    fc_channel: 56
+    rawid: 1067204
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 10
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 14
+S007:
+  name: S007
+  system: spms
+  location:
+    barrel: OB
+    fiber: OB003004
+    position: bottom
+  daq:
+    crate: 2
+    card:
+      id: 10
+      address: "0x2A0"
+      serialno: null
+    channel: 5
+    fc_channel: 57
+    rawid: 1067205
+  electronics:
+    card:
+      id: 4
+      serialno: null
+    channel: 11
+    cable: spm
+    flange: top
+    dsub:
+      id: 4
+      pinpair: 15
+PMT101:
+  name: PMT101
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 4
+    rawid: 2001604
+PMT704:
+  name: PMT704
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 5
+    rawid: 2001605
+PMT102:
+  name: PMT102
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 6
+    rawid: 2001606
+PMT705:
+  name: PMT705
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 7
+    rawid: 2001607
+PMT708:
+  name: PMT708
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 8
+    rawid: 2001608
+PMT104:
+  name: PMT104
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 9
+    rawid: 2001609
+PMT709:
+  name: PMT709
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 10
+    rawid: 2001610
+PMT105:
+  name: PMT105
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 11
+    rawid: 2001611
+PMT710:
+  name: PMT710
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 12
+    rawid: 2001612
+PMT707:
+  name: PMT707
+  system: pmts
+  location: pillbox
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x10"
+      serialno: null
+    channel: 13
+    rawid: 2001613
+PMT201:
+  name: PMT201
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 0
+    rawid: 2003200
+PMT202:
+  name: PMT202
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 1
+    rawid: 2003201
+PMT203:
+  name: PMT203
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 2
+    rawid: 2003202
+PMT706:
+  name: PMT706
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 3
+    rawid: 2003203
+PMT206:
+  name: PMT206
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 4
+    rawid: 2003204
+PMT208:
+  name: PMT208
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 5
+    rawid: 2003205
+PMT701:
+  name: PMT701
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 6
+    rawid: 2003206
+PMT703:
+  name: PMT703
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 7
+    rawid: 2003207
+PMT301:
+  name: PMT301
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 8
+    rawid: 2003208
+PMT302:
+  name: PMT302
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 9
+    rawid: 2003209
+PMT303:
+  name: PMT303
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 10
+    rawid: 2003210
+PMT304:
+  name: PMT304
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 11
+    rawid: 2003211
+PMT305:
+  name: PMT305
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 12
+    rawid: 2003212
+PMT306:
+  name: PMT306
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 13
+    rawid: 2003213
+PMT307:
+  name: PMT307
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 14
+    rawid: 2003214
+PMT308:
+  name: PMT308
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 15
+    rawid: 2003215
+PMT309:
+  name: PMT309
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 0
+      address: "0x20"
+      serialno: null
+    channel: 16
+    rawid: 2003216
+PMT310:
+  name: PMT310
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 17
+    rawid: 2003217
+PMT311:
+  name: PMT311
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 18
+    rawid: 2003218
+PMT312:
+  name: PMT312
+  system: pmts
+  location: floor
+  daq:
+    crate: 3
+    card:
+      id: 1
+      address: "0x20"
+      serialno: null
+    channel: 19
+    rawid: 2003219
+PMT401:
+  name: PMT401
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 0
+    rawid: 2004800
+PMT402:
+  name: PMT402
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 1
+    rawid: 2004801
+PMT403:
+  name: PMT403
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 2
+    rawid: 2004802
+PMT404:
+  name: PMT404
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 3
+    rawid: 2004803
+PMT409:
+  name: PMT409
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 4
+    rawid: 2004804
+PMT410:
+  name: PMT410
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 5
+    rawid: 2004805
+PMT501:
+  name: PMT501
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 6
+    rawid: 2004806
+PMT502:
+  name: PMT502
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 7
+    rawid: 2004807
+PMT503:
+  name: PMT503
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 8
+    rawid: 2004808
+PMT504:
+  name: PMT504
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 9
+    rawid: 2004809
+PMT507:
+  name: PMT507
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 10
+    rawid: 2004810
+PMT508:
+  name: PMT508
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 11
+    rawid: 2004811
+PMT509:
+  name: PMT509
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 12
+    rawid: 2004812
+PMT510:
+  name: PMT510
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 13
+    rawid: 2004813
+PMT602:
+  name: PMT602
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 14
+    rawid: 2004814
+PMT603:
+  name: PMT603
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 15
+    rawid: 2004815
+PMT605:
+  name: PMT605
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 16
+    rawid: 2004816
+PMT606:
+  name: PMT606
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 17
+    rawid: 2004817
+PMT607:
+  name: PMT607
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 18
+    rawid: 2004818
+PMT608:
+  name: PMT608
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 19
+    rawid: 2004819
+PMT609:
+  name: PMT609
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 20
+    rawid: 2004820
+PMT610:
+  name: PMT610
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 21
+    rawid: 2004821
+PMT702:
+  name: PMT702
+  system: pmts
+  location: wall
+  daq:
+    crate: 3
+    card:
+      id: 2
+      address: "0x30"
+      serialno: null
+    channel: 22
+    rawid: 2004822
