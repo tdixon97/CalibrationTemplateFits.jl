@@ -1,6 +1,6 @@
 data_path: /global/cfs/cdirs/m2676/data/lngs/l200/public/prodenv/prod-blind/tmp-auto/generated/tier/evt/lac/p14/r006
 file_list: data_files_p8224.yaml
-channel_map: bin/l200-p14-r%-T%-all-config.yaml
+channel_map: bin/config/l200-p14-r%-T%-all-config.yaml
 mc_path: /pscratch/sd/t/tdixon/sims/l200-p14-lac/out/hit_scan
 mc_label: sis-1_slot-2
 binning: 2610:10:2620
