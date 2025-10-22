@@ -71,9 +71,7 @@ function main()
         dets,
         glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
         binning,
-        #rawid_map,
-        r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
-        #vary_fccd = args["vary-fccd"]
+        r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)"
     )
 
     # and the histograms
