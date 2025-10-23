@@ -69,7 +69,12 @@ function build_likelihood(
     )
 end
 
-function build_prior(dets::AbstractVector; vary_fccd::Bool = false, zlims::Tuple{Float64, Float64} = (-20.0, 20.0), φlims::Tuple{Float64, Float64} = (-6.0,6.0))
+function build_prior(
+    dets::AbstractVector;
+    vary_fccd::Bool = false,
+    zlims::Tuple{Float64,Float64} = (-20.0, 20.0),
+    φlims::Tuple{Float64,Float64} = (-6.0, 6.0),
+)
 
     dist = if !vary_fccd
         distprod(A = 0.0 .. 3000.0, z = zlims[1] .. zlims[2], φ = φlims[1] .. φlims[2])

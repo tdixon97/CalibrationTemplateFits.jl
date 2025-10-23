@@ -63,7 +63,7 @@ end
 
 @testset "extract_grid_values" begin
     path = joinpath(@__DIR__, "test_files")
-    
+
     models = read_models(
         [:det1, :det2, :det3],
         [
@@ -75,8 +75,10 @@ end
         2600:20:2620,
         r".*z_([-\d.]+)_phi_([-\d.]+)",
     )
-    
-    @test CalibrationTemplateFits.extract_grid_values(models, :det1) == ((-1.0, 1.0), (0.0, 1.0))
-    @test CalibrationTemplateFits.extract_grid_values(models, :det2) == ((-1.0, 1.0), (0.0, 1.0))
+
+    @test CalibrationTemplateFits.extract_grid_values(models, :det1) ==
+          ((-1.0, 1.0), (0.0, 1.0))
+    @test CalibrationTemplateFits.extract_grid_values(models, :det2) ==
+          ((-1.0, 1.0), (0.0, 1.0))
 
 end

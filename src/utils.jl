@@ -92,12 +92,12 @@ end
 
 Extract the first and last z and φ grid values from the monte carlo files
 """
-function extract_grid_values(models::Dict{Symbol, GeneralisedHistogram}, det::Symbol)
+function extract_grid_values(models::Dict{Symbol,GeneralisedHistogram}, det::Symbol)
 
     range_z = models[det].grid.z
     range_φ = models[det].grid.φ
-    zlims = (first(range_z),last(range_z))
-    φlims = (first(range_φ),last(range_φ))
+    zlims = (first(range_z), last(range_z))
+    φlims = (first(range_φ), last(range_φ))
 
     return zlims, φlims
 

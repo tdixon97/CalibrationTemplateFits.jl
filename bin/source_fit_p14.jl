@@ -75,7 +75,7 @@ function main()
         dets,
         glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
         binning,
-        r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)"
+        r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
     )
 
     # and the histograms

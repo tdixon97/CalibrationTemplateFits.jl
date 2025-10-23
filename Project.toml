@@ -26,6 +26,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 Aqua = "0.8.14"
+ArgParse = "1.2.0"
 ArraysOfArrays = "0.6.6"
 BAT = "4.0.4"
 CairoMakie = "0.15.6"
@@ -44,22 +45,27 @@ Measures = "0.3.2"
 PDFmerger = "0.3.3"
 Plots = "1.41.1"
 ProgressMeter = "1.11.0"
+PropDicts = "0.2.10"
 Random = "1.11.0"
 StatsBase = "0.34.6"
 Test = "1"
 TypedTables = "1.4.6"
 Unitful = "1.25.1"
+YAML = "0.4.14"
 julia = "1.11"
 
 [extras]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
 ArraysOfArrays = "65a8f2f4-9b39-5baf-92e2-a9cc46fdf018"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
+PropDicts = "4dc08600-4268-439e-8673-d706fafbb426"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 TypedTables = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
+YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [targets]
 test = ["Aqua", "Test", "JuliaFormatter", "Random", "Distributions"]
