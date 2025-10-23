@@ -113,6 +113,7 @@ function main()
 
     @info "... make some summary plots"
     #plot_posteriors(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
+
     plot_reconstruction_makie(
         data_hists,
         models,
