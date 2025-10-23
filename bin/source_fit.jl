@@ -56,10 +56,11 @@ function main()
     dets = YAML.load_file(cfg.det_list)
     @info "... using detectors $dets"
 
+    spec = cfg.spec
     # read data
     @info "... read the data"
     binning = parse_binning(args["binning"])
-    data_hists = read_data_histograms(cfg.data_path, "hist/hit", dets, binning)
+    data_hists = read_data_histograms(cfg.data_path, "hist/$spec", dets, binning)
 
 
     list =
@@ -72,7 +73,7 @@ function main()
         glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
         binning,
         r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
-        "hist/hit",
+        "hist/$spec",
     )
 
 
@@ -104,7 +105,7 @@ function main()
     end
 
     @info "... make some summary plots"
-    #plot_posteriors(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
+    plot_posteriors(dir*"/plots.pdf", samples, dets, args["vary-fccd"])
     plot_reconstruction_makie(
         data_hists,
         models,
