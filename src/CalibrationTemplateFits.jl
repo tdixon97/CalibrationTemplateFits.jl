@@ -10,6 +10,7 @@ export parse_binning
 export read_models
 export read_models_evt
 export read_models_hist
+export extract_grid_values
 
 export build_likelihood
 export spectrum_likelihood

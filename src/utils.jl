@@ -86,3 +86,19 @@ function rebin_integer(h::Histogram, new_edges)
 
     return rebinned
 end
+
+"""
+    extract_grid_values(models::GeneralisedHistogram; det::String = dets[1])
+
+Extract the first and last z and φ grid values from the monte carlo files
+"""
+function extract_grid_values(models::Dict{Symbol,GeneralisedHistogram}, det::Symbol)
+
+    range_z = models[det].grid.z
+    range_φ = models[det].grid.φ
+    zlims = (first(range_z), last(range_z))
+    φlims = (first(range_φ), last(range_φ))
+
+    return zlims, φlims
+
+end
