@@ -39,9 +39,9 @@ end
 @testset "test_build_likelihood" begin
 
     data = append!(Histogram(2600:100:2700), [])
-    h1 = append!(Histogram(2600:100:2700), [2610])
-    h2 = append!(Histogram(2600:100:2700), [2610])
-    hists = [HistogramWithPars(h1, par = 0), HistogramWithPars(h2, par = 1)]
+    h_par0 = append!(Histogram(2600:100:2700), [2610])
+    h_par1 = append!(Histogram(2600:100:2700), [2690])
+    hists = [HistogramWithPars(h_par0, par = 0), HistogramWithPars(h_par1, par = 1)]
     model = GeneralisedHistogram(hists, par = 0:1:1)
 
     data_hists = Dict(:det1 => data)
