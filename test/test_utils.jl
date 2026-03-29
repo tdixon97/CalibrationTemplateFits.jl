@@ -7,12 +7,21 @@ using StatsBase
 @testset "test_set2range" begin
 
     @test CalibrationTemplateFits._set2range(Set([1, 2, 3.0]))==1.0:1:3.0
+
+    # Non-uniformly spaced set should throw
+    @test_throws ErrorException CalibrationTemplateFits._set2range(Set([1, 2, 4.0]))
+
 end
 
 @testset "test_binning" begin
 
     @test parse_binning("0.:10:20") == 0:10:20
     @test parse_binning("[1,2,3]") == [1, 2, 3]
+
+    # Wrong number of parts in range format should throw
+    @test_throws ErrorException parse_binning("1:2")
+    @test_throws ErrorException parse_binning("1:2:3:4")
+
 end
 
 
@@ -57,6 +66,12 @@ end
         h2 = CalibrationTemplateFits.rebin_integer(h, 0:10:10)
         @test sum(h2.weights) ≈ sum(h.weights)
         @test length(h2.weights) == 1
+    end
+
+    # 4. Out-of-range edges should throw
+    @testset "Out-of-range edges" begin
+        @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, -1:1:10)
+        @test_throws ArgumentError CalibrationTemplateFits.rebin_integer(h, 0:1:11)
     end
 end
 

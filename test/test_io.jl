@@ -51,6 +51,14 @@ end
         r".*z_([-\d.]+)_phi_([-\d.]+)",
     ) == (-1, 0)
 
+    # Empty file list should throw
+    @test_throws ArgumentError CalibrationTemplateFits.read_mc_files("det1", String[])
+
+    # Pattern with no match should throw
+    @test_throws ArgumentError CalibrationTemplateFits.extract_mc_coords(
+        "no_match_here",
+        r".*z_([-\d.]+)_phi_([-\d.]+)",
+    )
 
     models = read_models(
         [:det1, :det2, :det3],
@@ -86,4 +94,13 @@ end
         "hit",
     )
     @test all(mod isa GeneralisedHistogram for mod in values(mods))
+
+    # Empty file list should throw
+    @test_throws ArgumentError read_models_hist(
+        ["det1"],
+        String[],
+        2600:30:2630,
+        r".*z_([-\d.]+)_phi_([-\d.]+)",
+        "hit",
+    )
 end
