@@ -77,10 +77,7 @@ end
     @test h.pars == (par = 1.0,)
 
     # Should throw when histogram not found
-    @test_throws ArgumentError CalibrationTemplateFits._find_histogram(
-        hists,
-        (par = 2.0,),
-    )
+    @test_throws ArgumentError CalibrationTemplateFits._find_histogram(hists, (par = 2.0,))
 
 end
 
@@ -141,4 +138,3 @@ end
     @test CalibrationTemplateFits.get_weights(ghist_2d, z = 0.0, φ = 0.5) isa Vector
 
 end
-

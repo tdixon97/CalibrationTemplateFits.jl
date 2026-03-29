@@ -40,8 +40,9 @@ end
 
     data = append!(Histogram(2600:100:2700), [])
     h1 = append!(Histogram(2600:100:2700), [2610])
-    hists = [HistogramWithPars(h1, par = 0)]
-    model = GeneralisedHistogram(hists, par = 0:1:0)
+    h2 = append!(Histogram(2600:100:2700), [2610])
+    hists = [HistogramWithPars(h1, par = 0), HistogramWithPars(h2, par = 1)]
+    model = GeneralisedHistogram(hists, par = 0:1:1)
 
     data_hists = Dict(:det1 => data)
     models_dict = Dict(:det1 => model)
@@ -65,8 +66,7 @@ end
     @test prior !== nothing
 
     # Custom limits
-    prior_lims =
-        build_prior([:det1], zlims = (-5.0, 5.0), φlims = (-3.0, 3.0))
+    prior_lims = build_prior([:det1], zlims = (-5.0, 5.0), φlims = (-3.0, 3.0))
     @test prior_lims !== nothing
 
     # Prior with vary_fccd adds per-detector fccd parameters
