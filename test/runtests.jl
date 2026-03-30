@@ -6,8 +6,13 @@ include("test_functions.jl")
 include("test_likelihood.jl")
 include("test_utils.jl")
 include("test_io.jl")
+include("test_stats.jl")
 
-Aqua.test_all(CalibrationTemplateFits)
+Aqua.test_all(
+    CalibrationTemplateFits,
+    stale_deps = (ignore = [:CairoMakie, :LegendMakie],),
+    persistent_tasks = false,
+)
 
 Test.@testset verbose=true "Package CalibrationTemplateFits" begin
     include("test_aqua.jl")
@@ -16,5 +21,6 @@ Test.@testset verbose=true "Package CalibrationTemplateFits" begin
     include("test_likelihood.jl")
     include("test_utils.jl")
     include("test_io.jl")
+    include("test_stats.jl")
 
 end # testset

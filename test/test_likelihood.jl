@@ -35,3 +35,52 @@ using StatsBase
 
 
 end
+
+@testset "test_build_likelihood" begin
+
+    data = append!(Histogram(2600:100:2700), [])
+    h_par0 = append!(Histogram(2600:100:2700), [2610])
+    h_par1 = append!(Histogram(2600:100:2700), [2690])
+    hists = [HistogramWithPars(h_par0, par = 0), HistogramWithPars(h_par1, par = 1)]
+    model = GeneralisedHistogram(hists, par = 0:1:1)
+
+    data_hists = Dict(:det1 => data)
+    models_dict = Dict(:det1 => model)
+
+    lh = build_likelihood(data_hists, models_dict)
+    @test lh !== nothing
+
+    @test isapprox(
+        CalibrationTemplateFits.DensityInterface.logdensityof(lh, (par = 0.0, A = 1.0)),
+        -1.0,
+        atol = 1e-5,
+    )
+
+    # livetime and n_sim scaling
+    lh_scaled = build_likelihood(data_hists, models_dict, livetime = 2.0, n_sim = 2.0)
+    @test isapprox(
+        CalibrationTemplateFits.DensityInterface.logdensityof(
+            lh_scaled,
+            (par = 0.0, A = 1.0),
+        ),
+        -1.0,
+        atol = 1e-5,
+    )
+
+end
+
+@testset "test_build_prior" begin
+
+    # Basic prior (no vary_fccd)
+    prior = build_prior([:det1])
+    @test prior !== nothing
+
+    # Custom limits
+    prior_lims = build_prior([:det1], zlims = (-5.0, 5.0), φlims = (-3.0, 3.0))
+    @test prior_lims !== nothing
+
+    # Prior with vary_fccd adds per-detector fccd parameters
+    prior_fccd = build_prior([:det1, :det2], vary_fccd = true)
+    @test prior_fccd !== nothing
+
+end
