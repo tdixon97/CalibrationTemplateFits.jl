@@ -133,23 +133,25 @@ end
 
     save_histograms(data_hists, models, out_path, mode, norm)
 
-    @test isfile(out_path)
+    try
+        @test isfile(out_path)
 
-    # Read back and verify
-    lh5open(out_path, "r") do f
-        for det in dets
-            h_data = f["hist/data/$det"]
-            h_best_fit = f["hist/best_fit/$det"]
-            @test h_data isa Histogram
-            @test h_best_fit isa Histogram
+        # Read back and verify
+        lh5open(out_path, "r") do f
+            for det in dets
+                h_data = f["hist/data/$det"]
+                h_best_fit = f["hist/best_fit/$det"]
+                @test h_data isa Histogram
+                @test h_best_fit isa Histogram
+            end
         end
-    end
 
-    # verify data histogram weights round-trip correctly
-    lh5open(out_path, "r") do f
-        h_back = f["hist/data/det1"]
-        @test h_back.weights ≈ data_hists["det1"].weights
+        # verify data histogram weights round-trip correctly
+        lh5open(out_path, "r") do f
+            h_back = f["hist/data/det1"]
+            @test h_back.weights ≈ data_hists["det1"].weights
+        end
+    finally
+        isfile(out_path) && rm(out_path)
     end
-
-    rm(out_path)
 end
