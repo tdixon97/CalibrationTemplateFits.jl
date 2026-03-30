@@ -59,7 +59,10 @@ end
     # livetime and n_sim scaling
     lh_scaled = build_likelihood(data_hists, models_dict, livetime = 2.0, n_sim = 2.0)
     @test isapprox(
-        CalibrationTemplateFits.DensityInterface.logdensityof(lh_scaled, (par = 0.0, A = 1.0)),
+        CalibrationTemplateFits.DensityInterface.logdensityof(
+            lh_scaled,
+            (par = 0.0, A = 1.0),
+        ),
         -1.0,
         atol = 1e-5,
     )
