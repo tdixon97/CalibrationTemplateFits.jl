@@ -287,6 +287,39 @@ function read_models_evt(
 end
 
 """
+    save_histograms(
+        data::Dict,
+        models::Dict,
+        out_path::String,
+        mode::NamedTuple,
+        norm::Float64,
+    )
+
+Save the data and best-fit histograms to an LH5 file at `out_path`.
+
+Data histograms are stored under `hist/data/<det>` and best-fit prediction
+histograms (evaluated at `mode` and scaled by `norm`) under `hist/best_fit/<det>`.
+"""
+function save_histograms(
+    data::Dict,
+    models::Dict,
+    out_path::String,
+    mode::NamedTuple,
+    norm::Float64,
+)
+    lh5open(out_path, "w") do f
+        for (det, h) in data
+            f["hist/data/$(string(det))"] = h
+        end
+        for (det, model) in models
+            best_fit = get_histogram(model; mode...)
+            best_fit.weights .*= mode.A * norm
+            f["hist/best_fit/$(string(det))"] = best_fit
+        end
+    end
+end
+
+"""
      read_hist(group::String,file::String)
 """
 function read_hist(group::String, file::String)

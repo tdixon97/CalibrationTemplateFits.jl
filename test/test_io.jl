@@ -2,6 +2,7 @@
 using TypedTables
 using CalibrationTemplateFits
 using StatsBase
+using LegendHDF5IO
 
 @testset "test_read_data" begin
 
@@ -103,4 +104,52 @@ end
         r".*z_([-\d.]+)_phi_([-\d.]+)",
         "hit",
     )
+end
+
+@testset "test_save_histograms" begin
+
+    path = joinpath(@__DIR__, "test_files")
+    files = [
+        path*"/pdf_files/z_-1_phi_0.lh5",
+        path*"/pdf_files/z_1_phi_0.lh5",
+        path*"/pdf_files/z_-1_phi_1.lh5",
+        path*"/pdf_files/z_1_phi_1.lh5",
+    ]
+
+    dets = ["det1", "det2", "det3"]
+    binning = 2600:30:2630
+    data_hists = read_data_histograms(path*"/pdf_data.lh5", "hit", dets, binning)
+    models = read_models_hist(
+        dets,
+        files,
+        binning,
+        r".*z_([-\d.]+)_phi_([-\d.]+)",
+        "hit",
+    )
+
+    mode = (z = 0.0, φ = 0.5, A = 1.0)
+    norm = 1.0
+    out_path = joinpath(tempdir(), "test_histograms.lh5")
+
+    save_histograms(data_hists, models, out_path, mode, norm)
+
+    @test isfile(out_path)
+
+    # Read back and verify
+    lh5open(out_path, "r") do f
+        for det in dets
+            h_data = f["hist/data/$det"]
+            h_best_fit = f["hist/best_fit/$det"]
+            @test h_data isa Histogram
+            @test h_best_fit isa Histogram
+        end
+    end
+
+    # verify data histogram weights round-trip correctly
+    lh5open(out_path, "r") do f
+        h_back = f["hist/data/det1"]
+        @test h_back.weights ≈ data_hists["det1"].weights
+    end
+
+    rm(out_path)
 end

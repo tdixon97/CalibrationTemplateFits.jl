@@ -113,6 +113,15 @@ function main()
         cfg.livetime/cfg.n_sim,
     )
 
+    @info "... save histograms"
+    save_histograms(
+        data_hists,
+        models,
+        dir*"/histograms.lh5",
+        BAT.mode(samples),
+        cfg.livetime/cfg.n_sim,
+    )
+
 
 end
 
