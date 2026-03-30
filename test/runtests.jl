@@ -14,6 +14,7 @@ else
     Aqua.test_all(
         CalibrationTemplateFits,
         stale_deps = (ignore = [:CairoMakie, :LegendMakie],),
+        persistent_tasks = false,
     )
 end
 
