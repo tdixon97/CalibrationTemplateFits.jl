@@ -22,5 +22,6 @@ Test.@testset verbose=true "Package CalibrationTemplateFits" begin
     include("test_utils.jl")
     include("test_io.jl")
     include("test_stats.jl")
+    include("test_plots.jl")
 
 end # testset
