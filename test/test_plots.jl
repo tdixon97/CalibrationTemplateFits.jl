@@ -15,21 +15,21 @@ end
     end
 end
 
+# Shared test data for reconstruction tests
+_h1 = append!(Histogram(2600:100:2700), [2610])
+_h2 = append!(Histogram(2600:100:2700), [2690])
+_hists = [HistogramWithPars(_h1, par = 0), HistogramWithPars(_h2, par = 1)]
+_model = GeneralisedHistogram(_hists, par = 0:1:1)
+_data = fit(Histogram{Float64}, [2650.0], 2600:100:2700)
+_data_dict = Dict(:det1 => _data)
+_models_dict = Dict(:det1 => _model)
+_mode = (par = 0.0, A = 1.0)
+
 @testset "test_plot_reconstruction" begin
-    h1 = append!(Histogram(2600:100:2700), [2610])
-    h2 = append!(Histogram(2600:100:2700), [2690])
-    hists = [HistogramWithPars(h1, par = 0), HistogramWithPars(h2, par = 1)]
-    model = GeneralisedHistogram(hists, par = 0:1:1)
-
-    data = fit(Histogram{Float64}, [2650.0], 2600:100:2700)
-    data_dict = Dict(:det1 => data)
-    models_dict = Dict(:det1 => model)
-    mode = (par = 0.0, A = 1.0)
-
     mktempdir() do tmpdir
         out_path = joinpath(tmpdir, "test_output.pdf")
         cd(tmpdir) do
-            @test_nowarn plot_reconstruction(data_dict, models_dict, out_path, mode, 1.0)
+            @test_nowarn plot_reconstruction(_data_dict, _models_dict, out_path, _mode, 1.0)
         end
         @test isfile(out_path)
     end
@@ -37,24 +37,14 @@ end
 
 @static if Sys.WORD_SIZE == 64
     @testset "test_plot_reconstruction_makie" begin
-        h1 = append!(Histogram(2600:100:2700), [2610])
-        h2 = append!(Histogram(2600:100:2700), [2690])
-        hists = [HistogramWithPars(h1, par = 0), HistogramWithPars(h2, par = 1)]
-        model = GeneralisedHistogram(hists, par = 0:1:1)
-
-        data = fit(Histogram{Float64}, [2650.0], 2600:100:2700)
-        data_dict = Dict(:det1 => data)
-        models_dict = Dict(:det1 => model)
-        mode = (par = 0.0, A = 1.0)
-
         mktempdir() do tmpdir
             out_path = joinpath(tmpdir, "test_output_makie.pdf")
             cd(tmpdir) do
                 @test_nowarn plot_reconstruction_makie(
-                    data_dict,
-                    models_dict,
+                    _data_dict,
+                    _models_dict,
                     out_path,
-                    mode,
+                    _mode,
                     1.0,
                 )
             end
