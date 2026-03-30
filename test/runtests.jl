@@ -8,15 +8,11 @@ include("test_utils.jl")
 include("test_io.jl")
 include("test_stats.jl")
 
-if Sys.WORD_SIZE == 64
-    Aqua.test_all(CalibrationTemplateFits)
-else
-    Aqua.test_all(
-        CalibrationTemplateFits,
-        stale_deps = (ignore = [:CairoMakie, :LegendMakie],),
-        persistent_tasks = false,
-    )
-end
+Aqua.test_all(
+    CalibrationTemplateFits,
+    stale_deps = (ignore = [:CairoMakie, :LegendMakie],),
+    persistent_tasks = false,
+)
 
 Test.@testset verbose=true "Package CalibrationTemplateFits" begin
     include("test_aqua.jl")
