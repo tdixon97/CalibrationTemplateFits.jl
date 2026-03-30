@@ -1,5 +1,4 @@
 using CalibrationTemplateFits
-using DensityInterface
 using Test
 using StatsBase
 
@@ -51,12 +50,16 @@ end
     lh = build_likelihood(data_hists, models_dict)
     @test lh !== nothing
 
-    @test isapprox(DensityInterface.logdensityof(lh, (par = 0.0, A = 1.0)), -1.0, atol = 1e-5)
+    @test isapprox(
+        CalibrationTemplateFits.DensityInterface.logdensityof(lh, (par = 0.0, A = 1.0)),
+        -1.0,
+        atol = 1e-5,
+    )
 
     # livetime and n_sim scaling
     lh_scaled = build_likelihood(data_hists, models_dict, livetime = 2.0, n_sim = 2.0)
     @test isapprox(
-        DensityInterface.logdensityof(lh_scaled, (par = 0.0, A = 1.0)),
+        CalibrationTemplateFits.DensityInterface.logdensityof(lh_scaled, (par = 0.0, A = 1.0)),
         -1.0,
         atol = 1e-5,
     )
