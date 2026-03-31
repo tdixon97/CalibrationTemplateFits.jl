@@ -61,6 +61,7 @@ ArraysOfArrays = "65a8f2f4-9b39-5baf-92e2-a9cc46fdf018"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
+LegendHDF5IO = "c9265ca6-b027-5446-b1a4-febfa8dd10b0"
 PropDicts = "4dc08600-4268-439e-8673-d706fafbb426"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
@@ -68,4 +69,4 @@ TypedTables = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [targets]
-test = ["Aqua", "Test", "JuliaFormatter", "Random", "Distributions"]
+test = ["Aqua", "Test", "JuliaFormatter", "Random", "Distributions", "LegendHDF5IO"]

@@ -119,13 +119,7 @@ end
     dets = ["det1", "det2", "det3"]
     binning = 2600:30:2630
     data_hists = read_data_histograms(path*"/pdf_data.lh5", "hit", dets, binning)
-    models = read_models_hist(
-        dets,
-        files,
-        binning,
-        r".*z_([-\d.]+)_phi_([-\d.]+)",
-        "hit",
-    )
+    models = read_models_hist(dets, files, binning, r".*z_([-\d.]+)_phi_([-\d.]+)", "hit")
 
     mode = (z = 0.0, φ = 0.5, A = 1.0)
     norm = 1.0
