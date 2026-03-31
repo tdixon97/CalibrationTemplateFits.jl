@@ -12,30 +12,18 @@ _data_dict = Dict(:det1 => _data)
 _models_dict = Dict(:det1 => _model)
 _mode = (par = 0.0, A = 1.0)
 
-@testset "test_plot_reconstruction" begin
+@testset "test_plot_reconstruction_makie" begin
     mktempdir() do tmpdir
-        out_path = joinpath(tmpdir, "test_output.pdf")
+        out_path = joinpath(tmpdir, "test_output_makie.pdf")
         cd(tmpdir) do
-            @test_nowarn plot_reconstruction(_data_dict, _models_dict, out_path, _mode, 1.0)
+            @test_nowarn plot_reconstruction_makie(
+                _data_dict,
+                _models_dict,
+                out_path,
+                _mode,
+                1.0,
+            )
         end
         @test isfile(out_path)
-    end
-end
-
-@static if Sys.WORD_SIZE == 64
-    @testset "test_plot_reconstruction_makie" begin
-        mktempdir() do tmpdir
-            out_path = joinpath(tmpdir, "test_output_makie.pdf")
-            cd(tmpdir) do
-                @test_nowarn plot_reconstruction_makie(
-                    _data_dict,
-                    _models_dict,
-                    out_path,
-                    _mode,
-                    1.0,
-                )
-            end
-            @test isfile(out_path)
-        end
     end
 end
