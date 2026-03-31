@@ -77,7 +77,7 @@ function plot_reconstruction_makie(
     CairoMakie.axislegend(ax1; position = :rt)
 
     # Residuals subplot
-    ax2 = CairoMakie.Axis(fig[2, 1]; ylabel = "Residual [σ]", xticks = (1:n, dets))
+    ax2 = CairoMakie.Axis(fig[2, 1]; ylabel = "Residual [σ]", xticks = (1:n, string.(dets)))
 
     r = normalised_poisson_residual.(hPred.weights, hData.weights)
     CairoMakie.band!(ax2, 0:n, -3*ones(n+1), 3*ones(n+1), color = (:turquoise2, 0.3))
@@ -133,7 +133,13 @@ function plot_reconstruction_makie(
 
         CairoMakie.ylims!(ax2, -6, 6)
 
-        CairoMakie.band!(ax2, e, -3*ones(length(e)), 3*ones(length(e)), color = (:darkcyan, 0.3))
+        CairoMakie.band!(
+            ax2,
+            e,
+            -3 * ones(length(e)),
+            3 * ones(length(e)),
+            color = (:darkcyan, 0.3),
+        )
         CairoMakie.lines!(ax2, e, zeros(length(e)), color = :blue, linewidth = 2)
 
         CairoMakie.scatter!(
