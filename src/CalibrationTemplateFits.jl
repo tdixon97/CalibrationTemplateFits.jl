@@ -14,8 +14,6 @@ export extract_grid_values
 
 export build_likelihood
 export spectrum_likelihood
-export plot_posteriors
-export plot_reconstruction
 export plot_reconstruction_makie
 
 export build_prior
