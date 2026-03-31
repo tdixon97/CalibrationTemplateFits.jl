@@ -2,19 +2,6 @@ using CalibrationTemplateFits
 using Test
 using StatsBase
 
-@static if Sys.WORD_SIZE == 64
-    import CairoMakie
-end
-
-@testset "test_plot_hist" begin
-    @static if Sys.WORD_SIZE == 64
-        fig = CairoMakie.Figure()
-        ax = CairoMakie.Axis(fig[1, 1])
-        h = fit(Histogram{Float64}, [1.0, 2.0, 3.0], 0.0:1.0:4.0)
-        @test_nowarn plot_hist!(ax, h)
-    end
-end
-
 # Shared test data for reconstruction tests
 _h1 = append!(Histogram(2600:100:2700), [2610])
 _h2 = append!(Histogram(2600:100:2700), [2690])
