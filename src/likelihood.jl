@@ -13,8 +13,15 @@ variables.
 """
 function _poisson_likelihood(obs_weight::AbstractVector, pred_weight::AbstractVector)
 
-    return sum(logpdf.(Poisson.(pred_weight .+ eps.(pred_weight)), obs_weight))
-end
+    ll = 0.0
+    e0 = eps(ll)
+
+     @fastmath @inbounds @simd for i in eachindex(obs_weight)
+        λ = pred_weight[i] + e0      # avoid zero
+        k = obs[i]
+        ll += k*log(λ) - λ
+    end
+    return llend
 
 
 """
