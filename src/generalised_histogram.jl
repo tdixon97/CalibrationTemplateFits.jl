@@ -104,7 +104,7 @@ the model predictions are functions of nuisance parameters.
 julia> histograms = [HistogramWithPars(Histogram(0:1:4000),fccd=1.),
                     HistogramWithPars(Histogram(0:1:4000),fccd=2.)]
 julia> ghist = GeneralisedHistogram(histograms,fccd = 1.:1:2.)
-julia> get_bin_content(ghist,fccd = 1.5)
+julia> get_bin_content(1, ghist, fccd = 1.5)
 0.
 ```
 
