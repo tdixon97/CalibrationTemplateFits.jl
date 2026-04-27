@@ -85,12 +85,24 @@ end
 
     # 1D grid
     grid_1d = (par = 0.0:1.0:4.0,)
-    @test CalibrationTemplateFits.get_normalised_par_values(grid_1d, (par = 0.0,)) == 1.0
-    @test CalibrationTemplateFits.get_normalised_par_values(grid_1d, (par = 2.0,)) == 3.0
+    @test CalibrationTemplateFits.get_normalised_par_values(
+        grid_1d,
+        (par = 0.0,),
+        Val(1),
+    ) == (1.0,)
+    @test CalibrationTemplateFits.get_normalised_par_values(
+        grid_1d,
+        (par = 2.0,),
+        Val(1),
+    ) == (3.0,)
 
     # 2D grid: returns a Tuple
     grid_2d = (z = -1.0:1.0:1.0, φ = 0.0:1.0:1.0)
-    result = CalibrationTemplateFits.get_normalised_par_values(grid_2d, (z = 0.0, φ = 0.5))
+    result = CalibrationTemplateFits.get_normalised_par_values(
+        grid_2d,
+        (z = 0.0, φ = 0.5),
+        Val(2),
+    )
     @test result isa Tuple
     # grid_value(range, point) = (point - first(range)) / step(range) + 1
     # z: (0.0 - (-1.0)) / step(-1.0:1.0:1.0) + 1 = 1.0/1.0 + 1 = 2.0

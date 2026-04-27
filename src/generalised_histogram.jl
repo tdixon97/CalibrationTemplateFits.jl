@@ -149,7 +149,8 @@ function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     N = length(grid)
 
     interpolators = [
-        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for i = 1:size
+        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for
+        i = 1:size
     ]
 
     F = eltype(interpolators)
@@ -185,10 +186,10 @@ end
 Extract the parameter values on the grid.
 """
 @inline function get_normalised_par_values(
-    grid::NamedTuple{K},
-    pars::NamedTuple{K},
+    grid::NamedTuple,
+    pars::NamedTuple,
     ::Val{N},
-) where {K,N}
+) where {N}
 
     ntuple(i -> grid_value(getfield(grid, i), getfield(pars, i)), N)
 end
@@ -229,13 +230,11 @@ end
 
 Get the bin content for bin `idx` evaluating the generalising histogram.
 """
-function get_bin_content(idx::Int, hist::GeneralisedHistogram; kwargs...)
+function get_bin_content(idx::Int, hist::GeneralisedHistogram{N}; kwargs...) where {N}
 
-    parameters = NamedTuple(kwargs)
+    vals = get_normalised_par_values(hist.grid, NamedTuple(kwargs), Val(N))
 
-    # normalise the parameter value onto the unit grid
-    # TODO: test the order
-    norm_param_values = get_normalised_par_values(hist.grid, parameters)
+    par = build_par(Val(N), vals)
 
-    return hist.interpolators[idx](norm_param_values...)
+    return call_interp(hist.interpolators[idx], par)
 end
