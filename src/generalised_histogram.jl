@@ -149,8 +149,7 @@ function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     N = length(grid)
 
     interpolators = [
-        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for
-        i = 1:size
+        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for i = 1:size
     ]
 
     F = eltype(interpolators)
