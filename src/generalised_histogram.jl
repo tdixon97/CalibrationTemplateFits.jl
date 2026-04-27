@@ -103,17 +103,17 @@ the model predictions are functions of nuisance parameters.
 ```julia-repl
 julia> histograms = [HistogramWithPars(Histogram(0:1:4000),fccd=1.),
                     HistogramWithPars(Histogram(0:1:4000),fccd=2.)]
-julia> ghist = GeneralisedHist(histograms,fccd = 1.:1:2.)
+julia> ghist = GeneralisedHistogram(histograms,fccd = 1.:1:2.)
 julia> get_bin_content(ghist,fccd = 1.5)
 0.
 ```
 
 An arbitrary number of parameters is supported!
 """
-struct GeneralisedHistogram
-    interpolators::Vector{Any}
-    edges::Any
-    grid::NamedTuple
+struct GeneralisedHistogram{N,F,E,G}
+    interpolators::Vector{F}
+    edges::E
+    grid::G
 end
 
 """
@@ -137,24 +137,34 @@ of the grid spacing for every parameter.
 """
 function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     edges = histograms[1].hist.edges[1]
-    size = length(histograms[1].hist.weights)
+    size  = length(histograms[1].hist.weights)
 
-    # check the edges
+    # consistency check
     for hist in histograms
-        if edges != hist.hist.edges[1]
+        edges == hist.hist.edges[1] || 
             throw(ArgumentError("All histograms must have the same edges"))
-        end
     end
 
-    # build interpolators
-    interpolators = Vector{Any}()
-    for i = 1:size
-        counts_grid = _get_counts_grid(i, histograms, grid)
-        push!(interpolators, interpolate(counts_grid, BSpline(Linear())))
-    end
+    # dimension = number of parameters
+    N = length(grid)
 
-    return GeneralisedHistogram(interpolators, edges, grid)
+    interpolators = [
+        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear()))
+        for i in 1:size
+    ]
+
+    F = eltype(interpolators)
+
+    return GeneralisedHistogram{N,F,typeof(edges),G}(interpolators, edges, grid)
 end
+
+@inline function build_par(::Val{N}, vals) where N
+    ntuple(i -> vals[i], N)
+end
+
+@inline call_interp(itp, par::NTuple{1,Float64}) = itp(par[1])
+@inline call_interp(itp, par::NTuple{2,Float64}) = itp(par[1], par[2])
+@inline call_interp(itp, par::NTuple{3,Float64}) = itp(par[1], par[2], par[3])
 
 """
     grid_value(range::AbstractRange,point::Real)->Real
@@ -175,14 +185,13 @@ end
 
 Extract the parameter values on the grid.
 """
-function get_normalised_par_values(grid::NamedTuple, pars::NamedTuple)
+@inline function get_normalised_par_values(
+    grid::NamedTuple{K},
+    pars::NamedTuple{K},
+    ::Val{N}
+) where {K,N}
 
-    norm_param_values = Tuple(grid_value(grid[k], pars[k]) for k in keys(grid))
-    if (length(norm_param_values)==1)
-        return norm_param_values[1]
-    else
-        return norm_param_values
-    end
+    ntuple(i -> grid_value(getfield(grid, i), getfield(pars, i)), N)
 end
 
 """
@@ -190,17 +199,15 @@ end
 
 Get the weights evaluating the generalising histogram at the kwargs (nuisance parameters).
 """
-function get_weights(hist::GeneralisedHistogram; kwargs...)
-    parameters = NamedTuple(kwargs)
+function get_weights(hist::GeneralisedHistogram{N}; kwargs...) where N
+    vals = get_normalised_par_values(hist.grid, NamedTuple(kwargs),Val(N))
 
-    nbins = length(hist.interpolators)
-    weights = zeros(nbins)
+    par = build_par(Val(N), vals)
 
-    # normalise the parameter value onto the unit grid
-    norm_param_values = get_normalised_par_values(hist.grid, parameters)
+    weights = similar(hist.interpolators, Float64)
 
-    for i = 1:nbins
-        weights[i] = hist.interpolators[i](norm_param_values...)
+    @inbounds for i in eachindex(hist.interpolators)
+        weights[i] = call_interp(hist.interpolators[i], par)
     end
 
     return weights

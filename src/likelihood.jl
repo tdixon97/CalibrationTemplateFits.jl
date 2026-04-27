@@ -68,12 +68,17 @@ function build_likelihood(
         end,
     )
 end
+"""Build the prior based on the list of detectors.
 
+If `vary_fccd` is True the FCCD of each detector is included.
+Otherwise the distribution is uniform based on
+`zlims` and `φlims`.
+"""
 function build_prior(
     dets::AbstractVector;
     vary_fccd::Bool = false,
-    zlims::Tuple{Float64,Float64} = (-20.0, 20.0),
-    φlims::Tuple{Float64,Float64} = (-6.0, 6.0),
+    zlims::Tuple{Real,Real} = (-20.0, 20.0),
+    φlims::Tuple{Real,Real} = (-6.0, 6.0),
 )
 
     dist = if !vary_fccd
