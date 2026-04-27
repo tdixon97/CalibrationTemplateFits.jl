@@ -1,11 +1,13 @@
 name = "CalibrationTemplateFits"
 uuid = "421b3725-5a52-4150-a1b5-2789ece62381"
-authors = ["Toby Dixon <toby.dixon.23@ucl.ac.uk>"]
 version = "0.1.0"
+authors = ["Toby Dixon <toby.dixon.23@ucl.ac.uk>"]
 
 [deps]
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
 ArraysOfArrays = "65a8f2f4-9b39-5baf-92e2-a9cc46fdf018"
 BAT = "c0cd4b16-88b7-57fa-983b-ab80aecada7e"
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 DensityInterface = "b429d917-457f-4dbc-8f4c-0cc954292b1d"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
@@ -29,6 +31,7 @@ Aqua = "0.8.14"
 ArgParse = "1.2.0"
 ArraysOfArrays = "0.6.6"
 BAT = "4.0.4"
+BenchmarkTools = "1.8.0"
 CairoMakie = "0.15.6"
 DensityInterface = "0.4.0"
 Distributions = "0.25.122"

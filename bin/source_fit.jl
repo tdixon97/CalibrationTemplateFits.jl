@@ -20,11 +20,6 @@ function parse_commandline()
         arg_type = String
         required = true
 
-        "--pos", "-p"
-        help = "Position to use"
-        arg_type = Int
-        required = true
-
         "--binning", "-b"
         help = "Binning to use, either range or list"
         arg_type = String
@@ -52,7 +47,6 @@ function main()
 
     @info "Using config \n$s"
 
-    pos = args["pos"]
     dets = YAML.load_file(cfg.det_list)
     @info "... using detectors $dets"
 
@@ -69,7 +63,7 @@ function main()
     @info "... read mc"
     models = read_models_hist(
         dets,
-        glob(cfg.mc_label*"_"*"$pos*", cfg.mc_path),
+        glob(cfg.mc_label*"*", cfg.mc_path),
         binning,
         r".*z-offset_([-\d.]+)_phi-offset_([-\d.]+)",
         "hist/hit",
@@ -81,7 +75,8 @@ function main()
         build_likelihood(data_hists, models, n_sim = cfg.n_sim, livetime = cfg.livetime)
 
     # this can be in config but its hard to keep type stability
-    prior = build_prior(dets, vary_fccd = args["vary-fccd"])
+    @info "... make prior"
+    prior = build_prior(dets, φlims = (-4.,4.), zlims = (-20.,20.), vary_fccd = args["vary-fccd"])
 
     posterior = PosteriorMeasure(likelihood, prior)
 

@@ -1,0 +1,8 @@
+[deps]
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
+BAT = "c0cd4b16-88b7-57fa-983b-ab80aecada7e"
+CalibrationTemplateFits = "421b3725-5a52-4150-a1b5-2789ece62381"
+Glob = "c27321d9-0574-5035-807b-f59d2c89b15c"
+IntervalSets = "8197267c-284f-5f27-9208-e0e47529a953"
+PropDicts = "4dc08600-4268-439e-8673-d706fafbb426"
+YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
