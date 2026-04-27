@@ -137,11 +137,11 @@ of the grid spacing for every parameter.
 """
 function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     edges = histograms[1].hist.edges[1]
-    size  = length(histograms[1].hist.weights)
+    size = length(histograms[1].hist.weights)
 
     # consistency check
     for hist in histograms
-        edges == hist.hist.edges[1] || 
+        edges == hist.hist.edges[1] ||
             throw(ArgumentError("All histograms must have the same edges"))
     end
 
@@ -149,8 +149,8 @@ function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     N = length(grid)
 
     interpolators = [
-        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear()))
-        for i in 1:size
+        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for
+        i = 1:size
     ]
 
     F = eltype(interpolators)
@@ -158,7 +158,7 @@ function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     return GeneralisedHistogram{N,F,typeof(edges),G}(interpolators, edges, grid)
 end
 
-@inline function build_par(::Val{N}, vals) where N
+@inline function build_par(::Val{N}, vals) where {N}
     ntuple(i -> vals[i], N)
 end
 
@@ -188,7 +188,7 @@ Extract the parameter values on the grid.
 @inline function get_normalised_par_values(
     grid::NamedTuple{K},
     pars::NamedTuple{K},
-    ::Val{N}
+    ::Val{N},
 ) where {K,N}
 
     ntuple(i -> grid_value(getfield(grid, i), getfield(pars, i)), N)
@@ -199,8 +199,8 @@ end
 
 Get the weights evaluating the generalising histogram at the kwargs (nuisance parameters).
 """
-function get_weights(hist::GeneralisedHistogram{N}; kwargs...) where N
-    vals = get_normalised_par_values(hist.grid, NamedTuple(kwargs),Val(N))
+function get_weights(hist::GeneralisedHistogram{N}; kwargs...) where {N}
+    vals = get_normalised_par_values(hist.grid, NamedTuple(kwargs), Val(N))
 
     par = build_par(Val(N), vals)
 

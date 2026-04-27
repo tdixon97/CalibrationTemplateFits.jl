@@ -76,7 +76,12 @@ function main()
 
     # this can be in config but its hard to keep type stability
     @info "... make prior"
-    prior = build_prior(dets, φlims = (-4.,4.), zlims = (-20.,20.), vary_fccd = args["vary-fccd"])
+    prior = build_prior(
+        dets,
+        φlims = (-4.0, 4.0),
+        zlims = (-20.0, 20.0),
+        vary_fccd = args["vary-fccd"],
+    )
 
     posterior = PosteriorMeasure(likelihood, prior)
 
