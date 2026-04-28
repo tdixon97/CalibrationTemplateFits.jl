@@ -149,8 +149,7 @@ function GeneralisedHistogram(histograms::AbstractVector, grid::G) where {G}
     N = length(grid)
 
     interpolators = [
-        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for
-        i = 1:size
+        interpolate(_get_counts_grid(i, histograms, grid), BSpline(Linear())) for i = 1:size
     ]
 
     F = eltype(interpolators)
@@ -186,13 +185,17 @@ end
 Extract the parameter values on the grid.
 """
 @inline function get_normalised_par_values(
-    grid::NamedTuple,
+    grid::NamedTuple{K},
     pars::NamedTuple,
     ::Val{N},
-) where {N}
+) where {K,N}
 
-    ntuple(i -> grid_value(getfield(grid, i), getfield(pars, i)), N)
+    ntuple(i -> begin
+        name = K[i]
+        grid_value(getfield(grid, name), getfield(pars, name))
+    end, N)
 end
+
 
 """
     get_weights(hist::GeneralisedHistogram; kwargs...) -> Vector
