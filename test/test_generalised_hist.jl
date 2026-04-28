@@ -85,6 +85,7 @@ end
 
     # 1D grid
     grid_1d = (par = 0.0:1.0:4.0,)
+
     @test CalibrationTemplateFits.get_normalised_par_values(
         grid_1d,
         (par = 0.0,),
@@ -103,6 +104,21 @@ end
         (z = 0.0, φ = 0.5),
         Val(2),
     )
+    @test result isa Tuple
+    # grid_value(range, point) = (point - first(range)) / step(range) + 1
+    # z: (0.0 - (-1.0)) / step(-1.0:1.0:1.0) + 1 = 1.0/1.0 + 1 = 2.0
+    @test isapprox(result[1], 2.0, atol = 1e-10)
+    # φ: (0.5 - 0.0) / step(0.0:1.0:1.0) + 1 = 0.5/1.0 + 1 = 1.5
+    @test isapprox(result[2], 1.5, atol = 1e-10)
+
+    # test a different order
+
+    result = CalibrationTemplateFits.get_normalised_par_values(
+        grid_2d,
+        (b = 10, z = 0.0, φ = 0.5),
+        Val(2),
+    )
+
     @test result isa Tuple
     # grid_value(range, point) = (point - first(range)) / step(range) + 1
     # z: (0.0 - (-1.0)) / step(-1.0:1.0:1.0) + 1 = 1.0/1.0 + 1 = 2.0
